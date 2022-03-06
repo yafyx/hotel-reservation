@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipe_kamar', ['Standar', 'Executive', 'King Suites']);
+            $table->foreignId('id_kamar')->constrained('kamars')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('id_tamu')->constrained('tamus')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl');
             $table->integer('no_kamar');

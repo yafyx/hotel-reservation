@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\FasilitasController;
+use App\Http\Controllers\Admin\KamarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('/home/index');
 });
+
+Route::resource('/rooms', KamarController::class);
+Route::resource('/facilities', FasilitasController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resources([
+        '/kamar' => KamarController::class,
+    ]);
+});

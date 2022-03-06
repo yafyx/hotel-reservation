@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('kamars', function (Blueprint $table) {
             $table->id();
-            $table->string('tipe');
+            $table->enum('tipe_kamar', ['Standar', 'Deluxe', 'King Suites']);
             $table->integer('nomor');
             $table->string('fasilitas');
-            $table->integer('status');
+            $table->string('status');
             $table->timestamps();
         });
     }

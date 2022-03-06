@@ -25,4 +25,9 @@ class Reservasi extends Model
     {
         return $this->belongsTo(Tamu::class, 'id_tamu');
     }
+
+    public function GetKamar()
+    {
+        return $this->belongsTo(Kamar::class, 'id_kamar');
+    }
 }

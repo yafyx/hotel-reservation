@@ -14,6 +14,6 @@
     </div>
 </div>
 
-<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
-    asdsa
+<div class="bg-gray-200 bg-opacity-25">
+    <livewire:kamar-table />
 </div>
