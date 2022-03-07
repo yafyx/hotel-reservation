@@ -22,8 +22,8 @@ class ReservasiSeeder extends Seeder
                 'id_tamu' => $faker->numberBetween(1, 10),
                 'tgl' => $faker->dateTimeBetween('-1 years', 'now'),
                 'no_kamar' => $faker->numberBetween(1, 100),
-                'tgl_checkin' => $faker->dateTimeBetween('-1 years', 'now', $timezone = null),
-                'tgl_checkout' => $faker->dateTimeBetween('-1 years', 'now', $timezone = null),
+                'tgl_checkin' => $faker->dateTimeBetween('-1 years', 'now'),
+                'tgl_checkout' => $faker->dateTimeBetween('-1 years', '+1 years'),
                 'status' => $faker->boolean(50),
             ));
         }
