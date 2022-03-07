@@ -9,11 +9,11 @@ class Reservasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'reservasi';
+    protected $table = 'reservasis';
+    protected $guarded = [];
     protected $fillable = [
-        'tipe_kamar',
-        'nama_pemesan',
-        'nama_tamu',
+        'id_kamar',
+        'id_tamu',
         'tgl',
         'no_kamar',
         'tgl_checkin',

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tamu extends Model
 {
     use HasFactory;
-    protected $table = 'tamu';
+    protected $table = 'tamus';
     protected $fillable = ['nama', 'email', 'no_tlp'];
 
     public function Tamu()

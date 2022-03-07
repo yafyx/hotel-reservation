@@ -12,11 +12,31 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
-                </div>
+                @if (auth()->user()->isAdmin == 1)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.fasilitas') }}"
+                            :active="request()->routeIs('admin.fasilitas')">
+                            Fasilitas Hotel
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('admin.kamar') }}" :active="request()->routeIs('admin.kamar')">
+                            Fasilitas Kamar
+                        </x-jet-nav-link>
+                    </div>
+                @endif
+                @if (auth()->user()->isAdmin == 0)
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('rsp.reservasi') }}"
+                            :active="request()->routeIs('rsp.reservasi')">
+                            Reservasi
+                        </x-jet-nav-link>
+                    </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

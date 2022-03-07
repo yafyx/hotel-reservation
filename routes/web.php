@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\FasilitasController;
-use App\Http\Controllers\Admin\KamarController;
+use App\Http\Controllers\Resepsionis\ReservasiController;
+use App\Http\Controllers\Tamu\ViewController;
+use App\Http\Livewire\FasilitasTable;
+use App\Http\Livewire\KamarTable;
+use App\Http\Livewire\Reservasi\ReservasiC;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +21,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('/home/index');
 });
+Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
+Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');
 
-Route::resource('/rooms', KamarController::class);
-Route::resource('/facilities', FasilitasController::class);
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::resources([
-        '/kamar' => KamarController::class,
-    ]);
+Route::group(['middleware' => 'auth'], function () {
+    Route::middleware('auth:sanctum')->name('rsp.')->prefix('rsp')->group(function () {
+        Route::get('/reservasi', ReservasiC::class)->name('reservasi');
+    });
+});
+
+Route::group(['auth' => 'isAdmin'], function () {
+    Route::middleware('auth:sanctum')->name('admin.')->prefix('admin')->group(function () {
+        Route::get('/kamar', KamarTable::class)->name('kamar');
+        Route::get('/fasilitas', FasilitasTable::class)->name('fasilitas');
+    });
 });

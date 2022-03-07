@@ -27,12 +27,12 @@
                     <div class="h-full flex space-x-8">
                         <div class="flex">
                             <div class="relative flex">
-                                <a type="button" href="{{ route('rooms.index') }}"
+                                <a type="button" href="{{ route('rooms') }}"
                                     class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
                                     aria-expanded="false">Kamar</a>
                             </div>
                         </div>
-                        <a href="{{ route('facilities.index') }}"
+                        <a href="{{ route('facilities') }}"
                             class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Fasilitas</a>
                     </div>
                 </div>

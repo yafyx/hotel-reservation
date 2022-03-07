@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Reservasi;
 
 use App\Models\Kamar;
+use App\Models\Reservasi;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Livewire\Reservasi\ReservasiC;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
@@ -14,15 +16,22 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class KamarTable extends PowerGridComponent
+final class ReservasiTable extends PowerGridComponent
 {
-
     use ActionButton;
 
+    protected function getListeners()
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'delete',
+            ]
+        );
+    }
 
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
-
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +63,14 @@ final class KamarTable extends PowerGridComponent
      */
     public function datasource(): ?Builder
     {
-        return Kamar::query();
+        return Reservasi::query()
+            ->join('kamars', function ($kamars) {
+                $kamars->on('reservasis.id_kamar', '=', 'kamars.id');
+            })
+            ->join('tamus', function ($tamu) {
+                $tamu->on('reservasis.id_tamu', '=', 'tamus.id');
+            })
+            ->select('reservasis.*', 'kamars.tipe_kamar', 'tamus.nama');
     }
 
     /*
@@ -86,12 +102,28 @@ final class KamarTable extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('created_at_formatted', function (Kamar $model) {
-                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
+            ->addColumn('id_tamu')
+            ->addColumn('nama_tamu', function (Reservasi $reservasi) {
+                return $reservasi->GetTamu->nama;
             })
-            ->addColumn('updated_at_formatted', function (Kamar $model) {
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
+
+            ->addColumn('id_kamar', function (Reservasi $reservasi) {
+                return $reservasi->id_kamar;
+            })
+            ->addColumn('tipe_kamar', function (Reservasi $reservasi) {
+                return $reservasi->tipe_kamar;
+            })
+
+            ->addColumn('tgl')
+            ->addColumn('no_kamar')
+            ->addColumn('tgl_checkin', function (Reservasi $reservasi) {
+                return Carbon::parse($reservasi->tgl_checkin)->format('H:i d/m/Y');
+            })
+            ->addColumn('tgl_checkout', function (Reservasi $reservasi) {
+                return Carbon::parse($reservasi->tgl_checkout)->format('H:i d/m/Y');
+            })
+            ->addColumn('status', function (Reservasi $reservasi) {
+                return ($reservasi->status ? 'Check-In' : 'Check-Out');
             });
     }
 
@@ -111,22 +143,41 @@ final class KamarTable extends PowerGridComponent
      */
     public function columns(): array
     {
+        $canEdit = true;
         return [
             Column::add()
-                ->title('TIPE KAMAR')
+                ->title('Nama tamu')
+                ->field('nama_tamu')
+                ->editOnClick($canEdit)
+                ->searchable()
+                ->sortable(),
+
+            Column::add()
+                ->title('Tipe kamar')
                 ->field('tipe_kamar')
+                ->makeInputSelect(Kamar::with('Reservasi')->get(), 'tipe_kamar', 'id_kamar')
                 ->searchable()
                 ->sortable(),
 
             Column::add()
-                ->title('FASILITAS')
-                ->field('fasilitas')
+                ->title('Check in')
+                ->field('tgl_checkin')
+                ->editOnClick($canEdit)
+                ->makeInputDatePicker()
                 ->searchable()
                 ->sortable(),
 
             Column::add()
-                ->title('STATUS')
+                ->title('Check out')
+                ->field('tgl_checkout')
+                ->makeInputDatePicker()
+                ->searchable()
+                ->sortable(),
+
+            Column::add()
+                ->title('Status')
                 ->field('status')
+                ->makeBooleanFilter('reservasis.status', 'Check-In', 'Check-Out')
                 ->searchable()
                 ->sortable(),
 
@@ -142,7 +193,7 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Action Buttons.
+     * PowerGrid Reservasi Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
@@ -151,11 +202,22 @@ final class KamarTable extends PowerGridComponent
     public function actions(): array
     {
         return [
-            Button::add('delete')
+            // Button::add('edit')
+            //     ->caption('Edit')
+            //     ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
+            //     ->route('reservasi.edit', ['reservasi' => 'id']),
+
+            Button::add('destroy')
                 ->caption('Delete')
-                ->class('text-red-500 text-white px-3 py-2 m-1 rounded text-sm')
-                ->emit('deleteKamar', ['kamar' => 'id'])
+                ->class('text-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+                ->emit('delete', ['reservasi' => 'id']),
         ];
+    }
+
+    public function delete(Reservasi $reservasi)
+    {
+        $reservasi->delete();
+        $this->showUpdateMessages = true;
     }
 
     /*
@@ -167,23 +229,23 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Action Rules.
+     * PowerGrid Reservasi Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
 
-    /*
+
     public function actionRules(): array
     {
-       return [
-           
-           //Hide button edit for ID 1
-            Rule::button('edit')
-                ->when(fn($kamar) => $kamar->id === 1)
-                ->hide(),
+        return [
+
+            //Hide button edit for ID 1
+            // Rule::button('edit')
+            //     ->when(fn ($reservasi) => $reservasi->id === 1)
+            //     ->hide(),
         ];
     }
-    */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -195,23 +257,31 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Update.
+     * PowerGrid Reservasi Update.
      *
      * @param array<string,string> $data
      */
 
-    /*
-    public function update(array $data ): bool
+
+    public function update(array $data): bool
     {
-       try {
-           $updated = Kamar::query()->findOrFail($data['id'])
+        if ($data['field'] == 'nama_tamu') {
+            $data['field'] = 'nama';
+        }
+        if ($data['field'] == 'tgl_checkin' && $data['value'] != '') {
+            $data['field'] = 'tgl_checkin';
+            $data['value'] =  Carbon::createFromFormat('H:i d/m/Y', $data['value']);
+        }
+        try {
+            $updated = Reservasi::query()
+                ->find($data['id'])
                 ->update([
-                    $data['field'] => $data['value'],
+                    $data['field'] => $data['value']
                 ]);
-       } catch (QueryException $exception) {
-           $updated = false;
-       }
-       return $updated;
+        } catch (QueryException $exception) {
+            $updated = false;
+        }
+        return $updated;
     }
 
     public function updateMessages(string $status = 'error', string $field = '_default_message'): string
@@ -231,5 +301,4 @@ final class KamarTable extends PowerGridComponent
 
         return (is_string($message)) ? $message : 'Error!';
     }
-    */
 }

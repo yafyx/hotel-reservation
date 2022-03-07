@@ -2,7 +2,7 @@
     <div class="flex">
         <x-jet-application-logo class="block h-12 w-auto" />
         <p class="flex items-end ml-2">
-            @if (Auth::user()->role == 'isAdmin')
+            @if (Auth::user()->isAdmin == '1')
                 Administrator
             @else
                 Resepsionis
@@ -15,5 +15,4 @@
 </div>
 
 <div class="bg-gray-200 bg-opacity-25">
-    <livewire:kamar-table />
 </div>

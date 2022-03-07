@@ -18,13 +18,13 @@ class ReservasiSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i = 1; $i <= 10; $i++) {
             DB::table('reservasis')->insert(array(
-                'id_kamar' => $faker->numberBetween(1, 5),
+                'id_kamar' => $faker->numberBetween(1, 3),
                 'id_tamu' => $faker->numberBetween(1, 10),
                 'tgl' => $faker->dateTimeBetween('-1 years', 'now'),
                 'no_kamar' => $faker->numberBetween(1, 100),
-                'tgl_checkin' => $faker->dateTimeBetween('-1 years', 'now'),
-                'tgl_checkout' => $faker->dateTimeBetween('-1 years', 'now'),
-                'status' => $faker->randomElement(['Check-in', 'Check-out']),
+                'tgl_checkin' => $faker->dateTimeBetween('-1 years', 'now', $timezone = null),
+                'tgl_checkout' => $faker->dateTimeBetween('-1 years', 'now', $timezone = null),
+                'status' => $faker->boolean(50),
             ));
         }
     }
