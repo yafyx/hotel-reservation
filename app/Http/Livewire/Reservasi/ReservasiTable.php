@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Reservasi\ReservasiC;
+use App\Models\Tamu;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
@@ -88,8 +89,16 @@ final class ReservasiTable extends PowerGridComponent
      */
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'GetTamu' => [
+                'nama'
+            ],
+            'GetKamar' => [
+                'tipe_kamar'
+            ]
+        ];
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -102,6 +111,7 @@ final class ReservasiTable extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
+            ->addColumn('id')
             ->addColumn('id_tamu')
             ->addColumn('nama_tamu', function (Reservasi $reservasi) {
                 return $reservasi->GetTamu->nama;
@@ -146,8 +156,12 @@ final class ReservasiTable extends PowerGridComponent
         $canEdit = true;
         return [
             Column::add()
+                ->title('ID')
+                ->field('id', 'id')
+                ->hidden(),
+            Column::add()
                 ->title('Nama tamu')
-                ->field('nama_tamu')
+                ->field('nama_tamu', 'tamus.nama')
                 ->editOnClick($canEdit)
                 ->searchable()
                 ->sortable(),
@@ -160,7 +174,14 @@ final class ReservasiTable extends PowerGridComponent
                 ->sortable(),
 
             Column::add()
-                ->title('Check in')
+                ->title('Tgl Booking')
+                ->field('tgl')
+                ->editOnClick($canEdit)
+                ->makeInputDatePicker()
+                ->searchable()
+                ->sortable(),
+            Column::add()
+                ->title('Check-in')
                 ->field('tgl_checkin')
                 ->editOnClick($canEdit)
                 ->makeInputDatePicker()
@@ -168,7 +189,7 @@ final class ReservasiTable extends PowerGridComponent
                 ->sortable(),
 
             Column::add()
-                ->title('Check out')
+                ->title('Check-out')
                 ->field('tgl_checkout')
                 ->makeInputDatePicker()
                 ->searchable()
