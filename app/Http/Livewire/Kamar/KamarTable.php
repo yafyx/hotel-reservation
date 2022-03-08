@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Kamar;
 
-use App\Models\Fasilitas;
+use App\Models\Kamar;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +14,7 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class FasilitasTable extends PowerGridComponent
+final class KamarTable extends PowerGridComponent
 {
     use ActionButton;
 
@@ -51,7 +51,7 @@ final class FasilitasTable extends PowerGridComponent
     */
     public function datasource(): ?Builder
     {
-        return Fasilitas::query();
+        return Kamar::query();
     }
 
     /*
@@ -84,10 +84,13 @@ final class FasilitasTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('created_at_formatted', function(Fasilitas $model) { 
+            ->addColumn('tipe_kamar')
+            ->addColumn('fasilitas')
+            ->addColumn('status')
+            ->addColumn('created_at_formatted', function(Kamar $model) { 
                 return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
             })
-            ->addColumn('updated_at_formatted', function(Fasilitas $model) { 
+            ->addColumn('updated_at_formatted', function(Kamar $model) { 
                 return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
             });
     }
@@ -113,6 +116,27 @@ final class FasilitasTable extends PowerGridComponent
                 ->title('ID')
                 ->field('id')
                 ->makeInputRange(),
+
+            Column::add()
+                ->title('TIPE KAMAR')
+                ->field('tipe_kamar')
+                ->sortable()
+                ->searchable()
+                ->makeInputText(),
+
+            Column::add()
+                ->title('FASILITAS')
+                ->field('fasilitas')
+                ->sortable()
+                ->searchable()
+                ->makeInputText(),
+
+            Column::add()
+                ->title('STATUS')
+                ->field('status')
+                ->sortable()
+                ->searchable()
+                ->makeInputText(),
 
             Column::add()
                 ->title('CREATED AT')
@@ -141,7 +165,7 @@ final class FasilitasTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Fasilitas Action Buttons.
+     * PowerGrid Kamar Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
@@ -153,12 +177,12 @@ final class FasilitasTable extends PowerGridComponent
            Button::add('edit')
                ->caption('Edit')
                ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('fasilitas.edit', ['fasilitas' => 'id']),
+               ->route('kamar.edit', ['kamar' => 'id']),
 
            Button::add('destroy')
                ->caption('Delete')
                ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('fasilitas.destroy', ['fasilitas' => 'id'])
+               ->route('kamar.destroy', ['kamar' => 'id'])
                ->method('delete')
         ];
     }
@@ -173,7 +197,7 @@ final class FasilitasTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Fasilitas Action Rules.
+     * PowerGrid Kamar Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
@@ -185,7 +209,7 @@ final class FasilitasTable extends PowerGridComponent
            
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($fasilitas) => $fasilitas->id === 1)
+                ->when(fn($kamar) => $kamar->id === 1)
                 ->hide(),
         ];
     }
@@ -201,7 +225,7 @@ final class FasilitasTable extends PowerGridComponent
     */
 
      /**
-     * PowerGrid Fasilitas Update.
+     * PowerGrid Kamar Update.
      *
      * @param array<string,string> $data
      */
@@ -210,7 +234,7 @@ final class FasilitasTable extends PowerGridComponent
     public function update(array $data ): bool
     {
        try {
-           $updated = Fasilitas::query()->findOrFail($data['id'])
+           $updated = Kamar::query()->findOrFail($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
                 ]);

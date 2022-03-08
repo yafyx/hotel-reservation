@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Resepsionis\ReservasiController;
 use App\Http\Controllers\Tamu\ViewController;
+use App\Http\Livewire\Fasilitas\FasilitasC;
 use App\Http\Livewire\FasilitasTable;
+use App\Http\Livewire\Kamar\KamarC;
 use App\Http\Livewire\KamarTable;
 use App\Http\Livewire\Reservasi\ReservasiC;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +30,11 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::middleware('auth:sanctum')->name('rsp.')->prefix('rsp')->group(function () {
-        Route::get('/reservasi', ReservasiC::class)->name('reservasi');
-    });
+Route::middleware(['auth:sanctum'])->name('rsp.')->prefix('rsp')->group(function () {
+    Route::get('/reservasi', ReservasiC::class)->name('reservasi');
 });
 
-Route::group(['auth' => 'isAdmin'], function () {
-    Route::middleware('auth:sanctum')->name('admin.')->prefix('admin')->group(function () {
-        Route::get('/kamar', KamarTable::class)->name('kamar');
-        Route::get('/fasilitas', FasilitasTable::class)->name('fasilitas');
-    });
+Route::middleware('isAdmin')->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/kamar', KamarC::class)->name('kamar');
+    Route::get('/fasilitas', FasilitasC::class)->name('fasilitas');
 });

@@ -164,8 +164,8 @@ final class ReservasiTable extends PowerGridComponent
         return [
             Column::add()
                 ->title('Nama tamu')
-                ->field('nama_tamu', 'tamus.nama')
-                ->editOnClick()
+                ->field('nama_tamu')
+                ->makeInputText('tamus.nama')
                 ->searchable()
                 ->sortable(),
 
@@ -194,6 +194,7 @@ final class ReservasiTable extends PowerGridComponent
             Column::add()
                 ->title('Check-out')
                 ->field('tgl_checkout')
+                ->editOnClick($canEdit)
                 ->makeInputDatePicker()
                 ->searchable()
                 ->sortable(),
@@ -204,7 +205,6 @@ final class ReservasiTable extends PowerGridComponent
                 ->makeBooleanFilter('reservasis.status', 'Check-In', 'Check-Out')
                 ->searchable()
                 ->sortable(),
-
         ];
     }
 
@@ -233,7 +233,8 @@ final class ReservasiTable extends PowerGridComponent
 
             Button::add('destroy')
                 ->caption('Delete')
-                ->class('text-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
+                // ->class('text-red-500 px-3 py-2 m-1 text-sm shadow-md rounded')
+                ->class('bg-red-500 hover:bg-gradient-to-br shadow-lg shadow-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-red-500 text-center mr-2 mb-2')
                 ->emit('delete', ['reservasi' => 'id']),
         ];
     }
@@ -289,9 +290,6 @@ final class ReservasiTable extends PowerGridComponent
 
     public function update(array $data): bool
     {
-        if ($data['field'] == 'nama_tamu') {
-            $data['field'] = 'nama';
-        }
         if ($data['field'] == 'tgl' && $data['value'] != '') {
             $data['field'] = 'tgl';
             $data['value'] =  Carbon::createFromFormat('H:i d/m/Y', $data['value']);
@@ -315,6 +313,7 @@ final class ReservasiTable extends PowerGridComponent
         // }
 
         $updated = Reservasi::query()
+            ->with('GetTamu')
             ->update([
                 $data['field'] => $data['value']
             ]);

@@ -23,7 +23,7 @@ class Reservasi extends Model
 
     public function GetTamu()
     {
-        return $this->belongsTo(Tamu::class, 'id_tamu');
+        return $this->belongsTo(Tamu::class, 'id_tamu', 'id');
     }
 
     public function GetKamar()
