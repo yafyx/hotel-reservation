@@ -30,7 +30,7 @@ final class ReservasiTable extends PowerGridComponent
     }
 
     //Messages informing success/error data is updated.
-    public bool $showUpdateMessages = true;
+    public bool $showUpdateMessages = false;
 
     public string $primaryKey = 'reservasis.id', $primaryKeyName = 'reservasis.id';
     public string $sortField = 'reservasis.id';

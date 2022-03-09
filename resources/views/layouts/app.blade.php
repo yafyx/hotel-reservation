@@ -16,7 +16,7 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     @livewireScripts
-
+    @powerGridScripts
 </head>
 
 <body class="antialiased">
@@ -39,7 +39,6 @@
             {{ $slot }}
         </main>
     </div>
-    @powerGridScripts
     @livewire('livewire-ui-modal')
 </body>
 
