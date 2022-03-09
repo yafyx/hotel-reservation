@@ -320,6 +320,9 @@ final class ReservasiTable extends PowerGridComponent
             ->update([
                 $data['field'] => $data['value']
             ]);
+        $this->dispatchBrowserEvent(
+            'successEdit',
+        );
         return $updated;
     }
 

@@ -10,11 +10,13 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
     @livewireStyles
     @powerGridStyles
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/iziToast.js') }}"></script>
     @livewireScripts
     @powerGridScripts
 </head>
@@ -40,6 +42,7 @@
         </main>
     </div>
     @livewire('livewire-ui-modal')
+    @include('vendor.lara-izitoast.toast')
 </body>
 
 </html>

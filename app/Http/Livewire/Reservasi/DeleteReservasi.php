@@ -30,6 +30,10 @@ class DeleteReservasi extends ModalComponent
         $this->closeModalWithEvents([
             'pg:eventRefresh-default',
         ]);
+
+        $this->dispatchBrowserEvent(
+            'successDelete',
+        );
     }
 
     public function render()
