@@ -2228,6 +2228,9 @@ input:checked + .toggle-bg {
 .p-2\.5 {
   padding: 0.625rem;
 }
+.p-3 {
+  padding: 0.75rem;
+}
 .p-8 {
   padding: 2rem;
 }
@@ -2406,6 +2409,9 @@ input:checked + .toggle-bg {
 .pl-2 {
   padding-left: 0.5rem;
 }
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
 .pl-0 {
   padding-left: 0px;
 }
@@ -2435,6 +2441,9 @@ input:checked + .toggle-bg {
 }
 .align-middle {
   vertical-align: middle;
+}
+.align-bottom {
+  vertical-align: bottom;
 }
 .font-sans {
   font-family: Inter, sans-serif;
@@ -2488,6 +2497,9 @@ input:checked + .toggle-bg {
 }
 .font-black {
   font-weight: 900;
+}
+.font-normal {
+  font-weight: 400;
 }
 .uppercase {
   text-transform: uppercase;
@@ -2614,6 +2626,10 @@ input:checked + .toggle-bg {
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(200 30 30 / var(--tw-text-opacity));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .text-gray-200 {
   --tw-text-opacity: 1;
@@ -3295,6 +3311,11 @@ input:checked + .toggle-bg {
     margin-right: -0.75rem;
   }
 
+  .sm\:my-8 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
   .sm\:-mx-6 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -3344,6 +3365,10 @@ input:checked + .toggle-bg {
     display: block;
   }
 
+  .sm\:inline-block {
+    display: inline-block;
+  }
+
   .sm\:inline {
     display: inline;
   }
@@ -3362,6 +3387,10 @@ input:checked + .toggle-bg {
 
   .sm\:h-full {
     height: 100%;
+  }
+
+  .sm\:h-screen {
+    height: 100vh;
   }
 
   .sm\:h-20 {
@@ -3504,6 +3533,10 @@ input:checked + .toggle-bg {
     padding: 1.5rem;
   }
 
+  .sm\:p-0 {
+    padding: 0px;
+  }
+
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -3550,6 +3583,10 @@ input:checked + .toggle-bg {
 
   .sm\:text-right {
     text-align: right;
+  }
+
+  .sm\:align-middle {
+    vertical-align: middle;
   }
 
   .sm\:text-5xl {

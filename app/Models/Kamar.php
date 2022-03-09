@@ -14,7 +14,7 @@ class Kamar extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'tipe_kamar', 'fasilitas', 'harga', 'status'
+        'tipe_kamar', 'fasilitas', 'status'
     ];
 
     public function Reservasi()

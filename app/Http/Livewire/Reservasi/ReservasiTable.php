@@ -7,8 +7,6 @@ use App\Models\Reservasi;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Livewire\Reservasi\ReservasiC;
-use App\Models\Tamu;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
@@ -235,15 +233,20 @@ final class ReservasiTable extends PowerGridComponent
                 ->caption('Delete')
                 // ->class('text-red-500 px-3 py-2 m-1 text-sm shadow-md rounded')
                 ->class('bg-red-500 hover:bg-gradient-to-br shadow-lg shadow-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-red-500 text-center mr-2 mb-2')
-                ->emit('delete', ['reservasi' => 'id']),
+                // ->emit('delete', ['reservasi' => 'id'])
+                ->openModal('reservasi.delete-reservasi', [
+                    'reservasiId'                  => 'id',
+                    'confirmationTitle'       => 'Delete Reservasi',
+                    'confirmationDescription' => 'Are you sure you want to delete this data?',
+                ]),
         ];
     }
 
-    public function delete(Reservasi $reservasi)
-    {
-        $reservasi->delete();
-        $this->showUpdateMessages = true;
-    }
+    // public function delete(Reservasi $reservasi)
+    // {
+    //     $reservasi->delete();
+    //     $this->showUpdateMessages = true;
+    // }
 
     /*
     |--------------------------------------------------------------------------

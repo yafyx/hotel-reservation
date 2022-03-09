@@ -45,10 +45,10 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\User>|null
-    */
+     * PowerGrid datasource.
+     *
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\User>|null
+     */
     public function datasource(): ?Builder
     {
         return Kamar::query();
@@ -86,13 +86,7 @@ final class KamarTable extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('tipe_kamar')
             ->addColumn('fasilitas')
-            ->addColumn('status')
-            ->addColumn('created_at_formatted', function(Kamar $model) { 
-                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
-            })
-            ->addColumn('updated_at_formatted', function(Kamar $model) { 
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
-            });
+            ->addColumn('status');
     }
 
     /*
@@ -104,7 +98,7 @@ final class KamarTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -115,6 +109,7 @@ final class KamarTable extends PowerGridComponent
             Column::add()
                 ->title('ID')
                 ->field('id')
+                ->hidden()
                 ->makeInputRange(),
 
             Column::add()
@@ -127,6 +122,7 @@ final class KamarTable extends PowerGridComponent
             Column::add()
                 ->title('FASILITAS')
                 ->field('fasilitas')
+                ->editOnClick()
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
@@ -138,22 +134,7 @@ final class KamarTable extends PowerGridComponent
                 ->searchable()
                 ->makeInputText(),
 
-            Column::add()
-                ->title('CREATED AT')
-                ->field('created_at_formatted', 'created_at')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker('created_at'),
-
-            Column::add()
-                ->title('UPDATED AT')
-                ->field('updated_at_formatted', 'updated_at')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker('updated_at'),
-
-        ]
-;
+        ];
     }
 
     /*
@@ -164,7 +145,7 @@ final class KamarTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Kamar Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
@@ -196,7 +177,7 @@ final class KamarTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Kamar Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
@@ -224,7 +205,7 @@ final class KamarTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Kamar Update.
      *
      * @param array<string,string> $data

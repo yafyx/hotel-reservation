@@ -9,7 +9,6 @@ class ReservasiC extends Component
 {
     public function render()
     {
-        $this->reservasi = Reservasi::all();
         return view('reservation');
     }
 }
