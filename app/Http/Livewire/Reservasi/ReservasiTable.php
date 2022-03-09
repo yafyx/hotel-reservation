@@ -232,7 +232,7 @@ final class ReservasiTable extends PowerGridComponent
             Button::add('destroy')
                 ->caption('Delete')
                 // ->class('text-red-500 px-3 py-2 m-1 text-sm shadow-md rounded')
-                ->class('bg-red-500 hover:bg-gradient-to-br shadow-lg shadow-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-red-500 text-center mr-2 mb-2')
+                ->class('hover:text-black shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-red-500 text-center mr-2 mb-2')
                 // ->emit('delete', ['reservasi' => 'id'])
                 ->openModal('reservasi.delete-reservasi', [
                     'reservasiId'                  => 'id',

@@ -17,6 +17,16 @@ class DeleteReservasi extends ModalComponent
         return 'md';
     }
 
+    public static function closeModalOnEscape(): bool
+    {
+        return false;
+    }
+
+    public static function closeModalOnClickAway(): bool
+    {
+        return false;
+    }
+
     public function cancel()
     {
         $this->closeModal();
