@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Resepsionis\ReservasiController;
 use App\Http\Controllers\Tamu\ViewController;
 use App\Http\Livewire\Fasilitas\FasilitasC;
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::post('/login', LoginController::class);
 Route::middleware(['auth:sanctum'])->name('rsp.')->prefix('rsp')->group(function () {
     Route::get('/reservasi', ReservasiC::class)->name('reservasi');
 });

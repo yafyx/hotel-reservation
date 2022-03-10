@@ -48,6 +48,8 @@ final class ReservasiTable extends PowerGridComponent
         $this->showCheckBox()
             ->showPerPage()
             ->showSearchInput()
+            ->showRecordCount('full')
+            ->showToggleColumns()
             ->showExportOption('download', ['excel', 'csv']);
     }
 
@@ -127,14 +129,14 @@ final class ReservasiTable extends PowerGridComponent
             })
 
             ->addColumn('tgl', function (Reservasi $reservasi) {
-                return Carbon::parse($reservasi->tgl)->format('H:i d/m/Y');
+                return Carbon::parse($reservasi->tgl)->format('H:i, d/m/Y');
             })
             ->addColumn('no_kamar')
             ->addColumn('tgl_checkin', function (Reservasi $reservasi) {
-                return Carbon::parse($reservasi->tgl_checkin)->format('H:i d/m/Y');
+                return Carbon::parse($reservasi->tgl_checkin)->format('H:i, d/m/Y');
             })
             ->addColumn('tgl_checkout', function (Reservasi $reservasi) {
-                return Carbon::parse($reservasi->tgl_checkout)->format('H:i d/m/Y');
+                return Carbon::parse($reservasi->tgl_checkout)->format('H:i, d/m/Y');
             })
             ->addColumn('status', function (Reservasi $reservasi) {
                 return ($reservasi->status ? 'Check-In' : 'Check-Out');
@@ -236,8 +238,14 @@ final class ReservasiTable extends PowerGridComponent
                 // ->emit('delete', ['reservasi' => 'id'])
                 ->openModal('reservasi.delete-reservasi', [
                     'reservasiId'                  => 'id',
-                    'confirmationTitle'       => 'Delete Reservasi',
-                    'confirmationDescription' => 'Are you sure you want to delete this data?',
+                    'reservasiNama'                => 'nama_tamu',
+                    'reservasiTipeKamar'           => 'tipe_kamar',
+                    'reservasiTgl'                 => 'tgl',
+                    'reservasiCheckin'             => 'tgl_checkin',
+                    'reservasiCheckout'            => 'tgl_checkout',
+                    'reservasiStatus'              => 'status',
+                    'confirmationTitle'       => 'Hapus data reservasi',
+                    'confirmationDescription' => 'Apakah kamu yakin ingin menghapus data reservasi ini?',
                 ]),
         ];
     }
@@ -295,15 +303,15 @@ final class ReservasiTable extends PowerGridComponent
     {
         if ($data['field'] == 'tgl' && $data['value'] != '') {
             $data['field'] = 'tgl';
-            $data['value'] =  Carbon::createFromFormat('H:i d/m/Y', $data['value']);
+            $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
         }
         if ($data['field'] == 'tgl_checkin' && $data['value'] != '') {
             $data['field'] = 'tgl_checkin';
-            $data['value'] =  Carbon::createFromFormat('H:i d/m/Y', $data['value']);
+            $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
         }
         if ($data['field'] == 'tgl_checkout' && $data['value'] != '') {
             $data['field'] = 'tgl_checkout';
-            $data['value'] =  Carbon::createFromFormat('H:i d/m/Y', $data['value']);
+            $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
         }
         // try {
         //     $updated = Reservasi::query()

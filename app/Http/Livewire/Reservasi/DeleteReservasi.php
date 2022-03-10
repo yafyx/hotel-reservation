@@ -9,12 +9,19 @@ use LivewireUI\Modal\ModalComponent;
 class DeleteReservasi extends ModalComponent
 {
     public ?int $reservasiId = null;
+    public string $reservasiNama = '';
+    //resevasiTipeKamar
+    public string $reservasiTipeKamar = '';
+    public string $reservasiTgl = '';
+    public string $reservasiCheckin = '';
+    public string $reservasiCheckout = '';
+    public string $reservasiStatus = '';
     public string $confirmationTitle = '';
     public string $confirmationDescription = '';
 
     public static function modalMaxWidth(): string
     {
-        return 'md';
+        return 'xl';
     }
 
     public static function closeModalOnEscape(): bool
@@ -48,6 +55,6 @@ class DeleteReservasi extends ModalComponent
 
     public function render()
     {
-        return view('livewire.reservasi.delete-reservasi');
+        return view('livewire.reservasi.delete-reservasi')->with(['GetTamu', 'GetKamar']);
     }
 }

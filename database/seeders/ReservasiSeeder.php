@@ -16,7 +16,7 @@ class ReservasiSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             DB::table('reservasis')->insert(array(
                 'id_kamar' => $faker->numberBetween(1, 3),
                 'id_tamu' => $faker->numberBetween(1, 10),
