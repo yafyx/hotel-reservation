@@ -43,8 +43,11 @@
 
                 <div class="ml-auto flex items-center">
                     <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                        <a href="{{ route('login') }}"
-                            class="text-sm font-medium text-gray-700 hover:text-gray-800">Log in</a>
+                        <button
+                            class="flex items-center w-full text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                            type="button" data-modal-toggle="defaultModal">
+                            Pesan kamar
+                        </button>
                     </div>
                 </div>
             </div>
