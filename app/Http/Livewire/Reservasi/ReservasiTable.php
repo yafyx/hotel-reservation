@@ -19,16 +19,6 @@ final class ReservasiTable extends PowerGridComponent
 {
     use ActionButton;
 
-    protected function getListeners()
-    {
-        return array_merge(
-            parent::getListeners(),
-            [
-                'delete',
-            ]
-        );
-    }
-
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = false;
 
@@ -230,12 +220,22 @@ final class ReservasiTable extends PowerGridComponent
             //     ->caption('Edit')
             //     ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
             //     ->route('reservasi.edit', ['reservasi' => 'id']),
+            Button::add('detail')
+                ->caption(__('Detail'))
+                ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('reservasi.detail-reservasi', [
+                    'reservasiId'                  => 'id',
+                    'reservasiNama'                => 'nama_tamu',
+                    'reservasiTipeKamar'           => 'tipe_kamar',
+                    'reservasiTgl'                 => 'tgl',
+                    'reservasiCheckin'             => 'tgl_checkin',
+                    'reservasiCheckout'            => 'tgl_checkout',
+                    'reservasiStatus'              => 'status',
+                ]),
 
             Button::add('destroy')
                 ->caption('Delete')
-                // ->class('text-red-500 px-3 py-2 m-1 text-sm shadow-md rounded')
-                ->class('hover:text-black shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-red-500 text-center mr-2 mb-2')
-                // ->emit('delete', ['reservasi' => 'id'])
+                ->class('text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
                 ->openModal('reservasi.delete-reservasi', [
                     'reservasiId'                  => 'id',
                     'reservasiNama'                => 'nama_tamu',
@@ -249,12 +249,6 @@ final class ReservasiTable extends PowerGridComponent
                 ]),
         ];
     }
-
-    // public function delete(Reservasi $reservasi)
-    // {
-    //     $reservasi->delete();
-    //     $this->showUpdateMessages = true;
-    // }
 
     /*
     |--------------------------------------------------------------------------

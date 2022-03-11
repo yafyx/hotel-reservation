@@ -14,8 +14,9 @@ class Reservasi extends Model
     protected $fillable = [
         'id_kamar',
         'id_tamu',
+        'id_pemesan',
         'tgl',
-        'no_kamar',
+        'jumlah_kamar',
         'tgl_checkin',
         'tgl_checkout',
         'status',
@@ -26,8 +27,18 @@ class Reservasi extends Model
         return $this->belongsTo(Tamu::class, 'id_tamu', 'id');
     }
 
+    public function GetPemesan()
+    {
+        return $this->belongsTo(Tamu::class, 'id_pemesan', 'nama_pemesan');
+    }
+
     public function GetKamar()
     {
         return $this->belongsTo(Kamar::class, 'id_kamar');
+    }
+
+    public function GetJumlahKamar()
+    {
+        return $this->belongsTo(Kamar::class, 'jumlah_kamar', 'jumlah_kamar');
     }
 }

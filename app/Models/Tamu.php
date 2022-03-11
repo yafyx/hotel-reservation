@@ -15,4 +15,9 @@ class Tamu extends Model
     {
         return $this->hasOne(Reservasi::class, 'id_tamu');
     }
+
+    public function Pemesan()
+    {
+        return $this->hasOne(Reservasi::class, 'id_pemesan');
+    }
 }

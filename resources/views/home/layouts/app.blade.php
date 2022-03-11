@@ -24,7 +24,7 @@
 
         <main role="main" class="main-content">
             @yield('content')
-
+            @include('home.layouts.components.modal')
             @include('home.layouts.components.footer')
         </main>
     </div>

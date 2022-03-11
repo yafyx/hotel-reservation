@@ -14,11 +14,15 @@ class Kamar extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'tipe_kamar', 'fasilitas', 'status'
+        'tipe_kamar', 'fasilitas', 'gambar', 'jumlah_kamar',
     ];
 
     public function Reservasi()
     {
         return $this->hasOne(Reservasi::class, 'id_kamar');
+    }
+    public function JumlahKamar()
+    {
+        return $this->hasOne(Reservasi::class, 'jumlah_kamar', 'jumlah_kamar');
     }
 }
