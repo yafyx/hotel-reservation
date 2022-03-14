@@ -29,7 +29,7 @@ class DetailReservasi extends ModalComponent
 
     public function render()
     {
-        $reservasi = Reservasi::with(['GetTamu'])->find($this->reservasiId);
+        $reservasi = Reservasi::find($this->reservasiId);
         return view('livewire.reservasi.detail-reservasi')->with('reservasi', $reservasi);
     }
 }

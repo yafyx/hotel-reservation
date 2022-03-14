@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_tamu');
+            $table->string('nama_pemesan');
+            $table->string('email');
+            $table->string('no_tlp');
             $table->foreignId('id_kamar')->constrained('kamars')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('id_pemesan')->constrained('tamus')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('id_tamu')->constrained('tamus')->onUpdate('cascade')->onDelete('cascade');
-            $table->dateTime('tgl');
             $table->integer('jumlah_kamar');
             $table->dateTime('tgl_checkin');
             $table->dateTime('tgl_checkout');
-            $table->boolean('status');
+            $table->enum('status', ['menunggu checkin', 'checkin', 'checkout', 'batal']);
             $table->timestamps();
         });
     }

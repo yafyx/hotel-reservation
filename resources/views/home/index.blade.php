@@ -22,9 +22,8 @@
                             sangat baik
                         </p>
                         <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-                            <button
-                                class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
-                                type="button" data-modal-toggle="defaultModal">
+                            <button onclick="window.livewire.emit('openModal', 'booking.create-booking')"
+                                class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
                                 Pesan Kamar sekarang!
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -33,7 +32,6 @@
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
                             </button>
-
                         </div>
                     </div>
                 </div>

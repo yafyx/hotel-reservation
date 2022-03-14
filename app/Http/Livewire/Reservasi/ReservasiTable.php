@@ -62,10 +62,7 @@ final class ReservasiTable extends PowerGridComponent
             ->join('kamars', function ($kamars) {
                 $kamars->on('reservasis.id_kamar', '=', 'kamars.id');
             })
-            ->join('tamus', function ($tamu) {
-                $tamu->on('reservasis.id_tamu', '=', 'tamus.id');
-            })
-            ->select('reservasis.*', 'kamars.tipe_kamar', 'tamus.nama');
+            ->select('reservasis.*', 'kamars.tipe_kamar');
     }
 
     /*
@@ -84,9 +81,6 @@ final class ReservasiTable extends PowerGridComponent
     public function relationSearch(): array
     {
         return [
-            'GetTamu' => [
-                'nama'
-            ],
             'GetKamar' => [
                 'tipe_kamar'
             ]
@@ -106,9 +100,8 @@ final class ReservasiTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('id_tamu')
-            ->addColumn('nama_tamu', function (Reservasi $reservasi) {
-                return $reservasi->GetTamu->nama;
+            ->addColumn('nama_tamu', function ($reservasi) {
+                return $reservasi->nama_tamu;
             })
 
             ->addColumn('id_kamar', function (Reservasi $reservasi) {
@@ -118,19 +111,16 @@ final class ReservasiTable extends PowerGridComponent
                 return $reservasi->GetKamar->tipe_kamar;
             })
 
-            ->addColumn('tgl', function (Reservasi $reservasi) {
-                return Carbon::parse($reservasi->tgl)->format('H:i, d/m/Y');
+            ->addColumn('jumlah_kamar', function (Reservasi $reservasi) {
+                return $reservasi->jumlah_kamar;
             })
-            ->addColumn('no_kamar')
             ->addColumn('tgl_checkin', function (Reservasi $reservasi) {
                 return Carbon::parse($reservasi->tgl_checkin)->format('H:i, d/m/Y');
             })
             ->addColumn('tgl_checkout', function (Reservasi $reservasi) {
                 return Carbon::parse($reservasi->tgl_checkout)->format('H:i, d/m/Y');
             })
-            ->addColumn('status', function (Reservasi $reservasi) {
-                return ($reservasi->status ? 'Check-In' : 'Check-Out');
-            });
+            ->addColumn('status');
     }
 
     /*
@@ -155,7 +145,7 @@ final class ReservasiTable extends PowerGridComponent
             Column::add()
                 ->title('Nama tamu')
                 ->field('nama_tamu')
-                ->makeInputText('tamus.nama')
+                ->makeInputText('nama_tamu')
                 ->searchable()
                 ->sortable(),
 
@@ -168,7 +158,7 @@ final class ReservasiTable extends PowerGridComponent
 
             Column::add()
                 ->title('Tgl Booking')
-                ->field('tgl')
+                ->field('created_at')
                 ->editOnClick($canEdit)
                 ->makeInputDatePicker()
                 ->searchable()
@@ -192,7 +182,7 @@ final class ReservasiTable extends PowerGridComponent
             Column::add()
                 ->title('Status')
                 ->field('status')
-                ->makeBooleanFilter('reservasis.status', 'Check-In', 'Check-Out')
+                ->makeInputText('nama_tamu')
                 ->searchable()
                 ->sortable(),
         ];
@@ -227,7 +217,6 @@ final class ReservasiTable extends PowerGridComponent
                     'reservasiId'                  => 'id',
                     'reservasiNama'                => 'nama_tamu',
                     'reservasiTipeKamar'           => 'tipe_kamar',
-                    'reservasiTgl'                 => 'tgl',
                     'reservasiCheckin'             => 'tgl_checkin',
                     'reservasiCheckout'            => 'tgl_checkout',
                     'reservasiStatus'              => 'status',
@@ -295,10 +284,6 @@ final class ReservasiTable extends PowerGridComponent
 
     public function update(array $data): bool
     {
-        if ($data['field'] == 'tgl' && $data['value'] != '') {
-            $data['field'] = 'tgl';
-            $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
-        }
         if ($data['field'] == 'tgl_checkin' && $data['value'] != '') {
             $data['field'] = 'tgl_checkin';
             $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
@@ -307,21 +292,16 @@ final class ReservasiTable extends PowerGridComponent
             $data['field'] = 'tgl_checkout';
             $data['value'] =  Carbon::createFromFormat('H:i, d/m/Y', $data['value']);
         }
-        // try {
-        //     $updated = Reservasi::query()
-        //         ->find($data['id'])
-        //         ->update([
-        //             $data['field'] => $data['value']
-        //         ]);
-        // } catch (QueryException $exception) {
-        //     $updated = false;
-        // }
+        try {
+            $updated = Reservasi::query()
+                ->find($data['id'])
+                ->update([
+                    $data['field'] => $data['value']
+                ]);
+        } catch (QueryException $exception) {
+            $updated = false;
+        }
 
-        $updated = Reservasi::query()
-            ->with('GetTamu')
-            ->update([
-                $data['field'] => $data['value']
-            ]);
         $this->dispatchBrowserEvent(
             'successEdit',
         );

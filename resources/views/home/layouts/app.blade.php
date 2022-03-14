@@ -10,10 +10,11 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-
+    @livewireScripts
 </head>
 
 <body>
@@ -21,14 +22,19 @@
     <div class="bg-white">
         @include('home.layouts.components.navbar')
 
-
         <main role="main" class="main-content">
             @yield('content')
-            @include('home.layouts.components.modal')
             @include('home.layouts.components.footer')
         </main>
     </div>
-    @stack('js')
+    <script>
+        function app() {
+            return {
+                step: 1,
+            }
+        }
+    </script>
+    @livewire('livewire-ui-modal')
 </body>
 
 </html>

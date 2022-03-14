@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tamu;
 use App\Http\Controllers\Controller;
 use App\Models\Fasilitas;
 use App\Models\Kamar;
+use App\Models\Reservasi;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller

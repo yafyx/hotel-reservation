@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Resepsionis\ReservasiController;
+use App\Http\Controllers\Tamu\BookingController;
 use App\Http\Controllers\Tamu\ViewController;
 use App\Http\Livewire\Fasilitas\FasilitasC;
-use App\Http\Livewire\FasilitasTable;
 use App\Http\Livewire\Kamar\KamarC;
-use App\Http\Livewire\KamarTable;
 use App\Http\Livewire\Reservasi\ReservasiC;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('/home/index');
+    return view('/home.index');
 });
+
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');
 
