@@ -35,6 +35,7 @@
         }
     </script>
     @livewire('livewire-ui-modal')
+    <script src="https://unpkg.com/flowbite@1.3.4/dist/datepicker.js"></script>
 </body>
 
 </html>
