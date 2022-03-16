@@ -12,6 +12,7 @@ class Reservasi extends Model
     protected $table = 'reservasis';
     protected $guarded = [];
     protected $fillable = [
+        'booking_id',
         'nama_tamu',
         'nama_pemesan',
         'email',

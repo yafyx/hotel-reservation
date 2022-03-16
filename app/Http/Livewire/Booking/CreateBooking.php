@@ -10,6 +10,7 @@ use LivewireUI\Modal\ModalComponent;
 
 class CreateBooking extends ModalComponent
 {
+    public Reservasi $reservasi;
     public $nama_tamu, $nama_pemesan, $no_tlp, $email, $tipe_kamar, $jumlah_kamar, $tgl_checkin, $tgl_checkout;
 
     protected $rules = [
@@ -41,10 +42,9 @@ class CreateBooking extends ModalComponent
 
     public function store()
     {
-
         $this->validate();
-
-        Reservasi::create([
+        $reservasi = Reservasi::create([
+            'booking_id' => date('YmdHis') . $this->tipe_kamar,
             'nama_tamu' => $this->nama_tamu,
             'nama_pemesan' => $this->nama_pemesan,
             'email' => $this->email,
@@ -54,6 +54,8 @@ class CreateBooking extends ModalComponent
             'tgl_checkin' => $this->tgl_checkin,
             'tgl_checkout' => $this->tgl_checkout,
         ]);
+
+        return $this->unduhPDF($reservasi);
     }
 
     public function cancel()
@@ -61,9 +63,9 @@ class CreateBooking extends ModalComponent
         $this->closeModal();
     }
 
-    public function unduhPDF()
+    public function unduhPDF($reservasi)
     {
-        $pdf = PDF::loadView('home.layouts.pdf.buktiReservasi')->setPaper('a4', 'landscape')->output();
+        $pdf = PDF::loadView('home.layouts.pdf.buktiReservasi', compact('reservasi'))->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(
             fn () => print($pdf),
             "buktiReservasi.pdf"

@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::get('/buktiReservasi', function () {
     return view('/home.layouts.pdf.buktiReservasi');
 });
+
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');
 

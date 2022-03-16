@@ -18,6 +18,7 @@ class ReservasiSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i = 1; $i <= 100; $i++) {
             DB::table('reservasis')->insert(array(
+                'booking_id' => $faker->date('YmdHis') . $faker->numberBetween(1, 3),
                 'nama_tamu' => $faker->name,
                 'nama_pemesan' => $faker->name,
                 'email' => $faker->email,

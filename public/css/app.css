@@ -2819,10 +2819,6 @@ input:checked + .toggle-bg {
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-.backdrop-filter {
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -3009,6 +3005,9 @@ input:checked + .toggle-bg {
 .focus\:border-gray-600:focus {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
+}
+.focus\:border-transparent:focus {
+  border-color: transparent;
 }
 .focus\:bg-indigo-600:focus {
   --tw-bg-opacity: 1;
@@ -3367,6 +3366,9 @@ input:checked + .toggle-bg {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));
 }
+.dark .dark\:ring-offset-gray-800 {
+  --tw-ring-offset-color: #1F2937;
+}
 .dark .dark\:hover\:border-gray-700:hover {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
@@ -3438,6 +3440,10 @@ input:checked + .toggle-bg {
 .dark .dark\:focus\:ring-red-800:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(155 28 28 / var(--tw-ring-opacity));
+}
+.dark .dark\:focus\:ring-blue-600:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(28 100 242 / var(--tw-ring-opacity));
 }
 .peer:focus ~ .dark .peer-focus\:dark\:text-blue-500 {
   --tw-text-opacity: 1;

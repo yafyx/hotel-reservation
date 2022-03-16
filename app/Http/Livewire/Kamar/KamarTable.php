@@ -86,7 +86,8 @@ final class KamarTable extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('tipe_kamar')
             ->addColumn('fasilitas')
-            ->addColumn('status');
+            ->addColumn('gambar')
+            ->addColumn('jumlah_kamar');
     }
 
     /*
@@ -122,18 +123,22 @@ final class KamarTable extends PowerGridComponent
             Column::add()
                 ->title('FASILITAS')
                 ->field('fasilitas')
-                ->editOnClick()
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
 
             Column::add()
-                ->title('STATUS')
-                ->field('status')
+                ->title('GAMBAR')
+                ->field('gambar')
+                ->sortable()
+                ->searchable(),
+
+            Column::add()
+                ->title('JUMLAH KAMAR')
+                ->field('jumlah_kamar')
                 ->sortable()
                 ->searchable()
                 ->makeInputText(),
-
         ];
     }
 
@@ -151,23 +156,36 @@ final class KamarTable extends PowerGridComponent
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
 
-    /*
+
     public function actions(): array
     {
-       return [
-           Button::add('edit')
-               ->caption('Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('kamar.edit', ['kamar' => 'id']),
+        return [
+            Button::add('edit')
+                ->caption(__('Edit'))
+                ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('kamar.edit-kamar', [
+                    'kamarId' => 'id',
+                    'tipeKamar' => 'tipe_kamar',
+                    'fasilitas' => 'fasilitas',
+                    'gambar' => 'gambar',
+                    'jumlahKamar' => 'jumlah_kamar',
+                ]),
 
-           Button::add('destroy')
-               ->caption('Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('kamar.destroy', ['kamar' => 'id'])
-               ->method('delete')
+            Button::add('destroy')
+                ->caption('Delete')
+                ->class('text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('kamar.delete-kamar', [
+                    'kamarId' => 'id',
+                    'tipeKamar' => 'tipe_kamar',
+                    'fasilitas' => 'fasilitas',
+                    'gambar' => 'gambar',
+                    'jumlahKamar' => 'jumlah_kamar',
+                    'confirmationTitle'       => 'Hapus data reservasi',
+                    'confirmationDescription' => 'Apakah kamu yakin ingin menghapus data reservasi ini?',
+                ]),
         ];
     }
-    */
+
 
     /*
     |--------------------------------------------------------------------------

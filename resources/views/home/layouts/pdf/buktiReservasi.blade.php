@@ -5,8 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Bukti Reservasi</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
     <style>
         .invoice-box {
             max-width: 800px;
@@ -16,7 +14,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, .15);
             font-size: 16px;
             line-height: 24px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #555;
         }
 
@@ -121,16 +119,18 @@
                             <td>
                                 Booking ID<br>
                                 <span style="font-size: xx-large; font-weight: bold">
-                                    12312312
+                                    {{ $reservasi->booking_id }}
                                 </span>
                             </td>
                             <td>
                                 Check-in<br>
-                                18 Jun 2019<br>
+                                {{ \Carbon\Carbon::parse($reservasi->tgl_checkin)->format('d M Y') }}
+                                <br>
                             </td>
                             <td>
                                 Check-out<br>
-                                18 Jun 2019<br>
+                                {{ \Carbon\Carbon::parse($reservasi->tgl_checkout)->format('d M Y') }}
+                                <br>
                             </td>
                         </tr>
                     </table>
@@ -150,7 +150,7 @@
                 </td>
 
                 <td>
-                    Yafik
+                    {{ $reservasi->nama_tamu }}
                 </td>
             </tr>
 
@@ -160,7 +160,7 @@
                 </td>
 
                 <td>
-                    Deluxe
+                    {{ $reservasi->GetKamar->tipe_kamar }}
                 </td>
             </tr>
 
@@ -170,7 +170,7 @@
                 </td>
 
                 <td>
-                    1
+                    {{ $reservasi->jumlah_kamar }}
                 </td>
             </tr>
         </table>
