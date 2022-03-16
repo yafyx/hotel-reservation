@@ -3002,12 +3002,12 @@ input:checked + .toggle-bg {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
+.focus\:border-transparent:focus {
+  border-color: transparent;
+}
 .focus\:border-gray-600:focus {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
-}
-.focus\:border-transparent:focus {
-  border-color: transparent;
 }
 .focus\:bg-indigo-600:focus {
   --tw-bg-opacity: 1;
@@ -3366,9 +3366,6 @@ input:checked + .toggle-bg {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));
 }
-.dark .dark\:ring-offset-gray-800 {
-  --tw-ring-offset-color: #1F2937;
-}
 .dark .dark\:hover\:border-gray-700:hover {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
@@ -3440,10 +3437,6 @@ input:checked + .toggle-bg {
 .dark .dark\:focus\:ring-red-800:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(155 28 28 / var(--tw-ring-opacity));
-}
-.dark .dark\:focus\:ring-blue-600:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(28 100 242 / var(--tw-ring-opacity));
 }
 .peer:focus ~ .dark .peer-focus\:dark\:text-blue-500 {
   --tw-text-opacity: 1;

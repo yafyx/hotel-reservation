@@ -33,6 +33,13 @@
             position: 'topRight',
         });
     });
+    window.addEventListener('successAdd', event => {
+        iziToast.success({
+            title: 'Berhasil',
+            message: 'Berhasil menambah data',
+            position: 'topRight',
+        });
+    });
 </script>
 
 {{ session()->forget('toasts') }}

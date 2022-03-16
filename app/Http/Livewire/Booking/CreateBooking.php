@@ -10,7 +10,6 @@ use LivewireUI\Modal\ModalComponent;
 
 class CreateBooking extends ModalComponent
 {
-    public Reservasi $reservasi;
     public $nama_tamu, $nama_pemesan, $no_tlp, $email, $tipe_kamar, $jumlah_kamar, $tgl_checkin, $tgl_checkout;
 
     protected $rules = [
