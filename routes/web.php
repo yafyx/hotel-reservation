@@ -19,27 +19,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', LoginController::class);
+
 Route::get('/', function () {
     return view('/home.index');
 });
-
 Route::get('/buktiReservasi', function () {
     return view('/home.layouts.pdf.buktiReservasi');
 });
-
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');
 
-Route::middleware(['auth:sanctum'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/dashboard', function () {
+        return view('/dashboard');
+    })->name('dashboard');
 
-Route::post('/login', LoginController::class);
-Route::middleware(['auth:sanctum'])->name('rsp.')->prefix('rsp')->group(function () {
-    Route::get('/reservasi', ReservasiC::class)->name('reservasi');
-});
+    Route::middleware('CheckRole:rsp')->name('rsp.')->prefix('rsp')->group(function () {
+        Route::get('/reservasi', ReservasiC::class)->name('reservasi');
+    });
 
-Route::middleware('isAdmin')->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/kamar', KamarC::class)->name('kamar');
-    Route::get('/fasilitas', FasilitasC::class)->name('fasilitas');
+    Route::middleware('CheckRole:admin')->name('admin.')->prefix('admin')->group(function () {
+        Route::get('/kamar', KamarC::class)->name('kamar');
+        Route::get('/fasilitas', FasilitasC::class)->name('fasilitas');
+    });
 });

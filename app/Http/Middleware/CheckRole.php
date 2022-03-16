@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -14,9 +14,14 @@ class IsAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (!auth()->user()->isAdmin ) {
+        $roles = [
+            'admin' => [1],
+            'rsp' => [0],
+        ];
+
+        if (!in_array(auth()->user()->isAdmin, $roles[$role])) {
             return abort(404);
         }
 
