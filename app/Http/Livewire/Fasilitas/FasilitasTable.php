@@ -45,10 +45,10 @@ final class FasilitasTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Fasilitas>|null
-    */
+     * PowerGrid datasource.
+     *
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\Fasilitas>|null
+     */
     public function datasource(): ?Builder
     {
         return Fasilitas::query();
@@ -83,13 +83,8 @@ final class FasilitasTable extends PowerGridComponent
     public function addColumns(): ?PowerGridEloquent
     {
         return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('created_at_formatted', function(Fasilitas $model) { 
-                return Carbon::parse($model->created_at)->format('d/m/Y H:i:s');
-            })
-            ->addColumn('updated_at_formatted', function(Fasilitas $model) { 
-                return Carbon::parse($model->updated_at)->format('d/m/Y H:i:s');
-            });
+            ->addColumn('nama_fasilitas')
+            ->addColumn('gambar');
     }
 
     /*
@@ -101,7 +96,17 @@ final class FasilitasTable extends PowerGridComponent
     |
     */
 
-     /**
+    public function header(): array
+    {
+        return [
+            Button::add('create')
+                ->caption(__('Tambah Fasilitas'))
+                ->class('block cursor-pointer text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('fasilitas.create-fasilitas', []),
+        ];
+    }
+
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -110,26 +115,13 @@ final class FasilitasTable extends PowerGridComponent
     {
         return [
             Column::add()
-                ->title('ID')
-                ->field('id')
-                ->makeInputRange(),
-
+                ->title('Nama fasilitas')
+                ->field('nama_fasilitas')
+                ->sortable(),
             Column::add()
-                ->title('CREATED AT')
-                ->field('created_at_formatted', 'created_at')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker('created_at'),
-
-            Column::add()
-                ->title('UPDATED AT')
-                ->field('updated_at_formatted', 'updated_at')
-                ->searchable()
-                ->sortable()
-                ->makeInputDatePicker('updated_at'),
-
-        ]
-;
+                ->title('Gambar')
+                ->field('gambar'),
+        ];
     }
 
     /*
@@ -140,29 +132,36 @@ final class FasilitasTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Fasilitas Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
 
-    /*
     public function actions(): array
     {
-       return [
-           Button::add('edit')
-               ->caption('Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('fasilitas.edit', ['fasilitas' => 'id']),
+        return [
+            Button::add('edit')
+                ->caption(__('Edit'))
+                ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('fasilitas.edit-fasilitas', [
+                    'fasilitasId' => 'id',
+                    'namaFasilitas' => 'nama_fasilitas',
+                    'gambar' => 'gambar',
+                ]),
 
-           Button::add('destroy')
-               ->caption('Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('fasilitas.destroy', ['fasilitas' => 'id'])
-               ->method('delete')
+            Button::add('destroy')
+                ->caption('Delete')
+                ->class('text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('fasilitas.delete-fasilitas', [
+                    'fasilitasId' => 'id',
+                    'namaFasilitas' => 'nama_fasilitas',
+                    'gambar' => 'gambar',
+                    'confirmationTitle'       => 'Hapus fasilitas',
+                    'confirmationDescription' => 'Apakah kamu yakin ingin menghapus fasilitas ini?',
+                ]),
         ];
     }
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +171,7 @@ final class FasilitasTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Fasilitas Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
@@ -200,7 +199,7 @@ final class FasilitasTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Fasilitas Update.
      *
      * @param array<string,string> $data
