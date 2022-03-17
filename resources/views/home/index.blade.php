@@ -1,9 +1,51 @@
 @extends('home.layouts.app')
 @section('title', 'Home')
 @section('content')
-    <section class="px-2 py-32 bg-white md:px-0">
+    <section class="px-2 pb-32 pt-10 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
-            <div class="flex flex-wrap items-center sm:-mx-3">
+            <form action="{{ route('booking.create') }}" method="PUT">
+                @csrf
+                <div
+                    class="flex justify-evenly p-4 w-full text-center bg-white rounded-lg border shadow-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <div date-rangepicker="" datepicker-buttons datepicker-format="d M y" class="flex items-center">
+                        <div class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input name="tgl_checkin" type="text" autocomplete="off" wire:model="tgl_checkin"
+                                class="
+                            bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                placeholder="Pilih tanggal check-in">
+                        </div>
+                        <span class="mx-4 text-gray-500">sampai</span>
+                        <div class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input name="tgl_checkout" type="text" autocomplete="off" wire:model="tgl_checkout"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
+                                placeholder="Pilih tanggal check-out">
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="
+                    text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Pesan
+                    </button>
+                </div>
+            </form>
+
+            <div class="flex flex-wrap items-center sm:-mx-3 mt-10">
                 <div class="w-full md:w-1/2 md:px-3">
                     <div
                         class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
@@ -19,9 +61,9 @@
                         </h1>
                         <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">Kami fokus
                             untuk menyediakan klien dengan tingkat kenyamanan tertinggi dan harga terjangkau yang
-                            sangat baik
+                            sangat baik.
                         </p>
-                        <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+                        {{-- <div class="relative flex flex-col sm:flex-row sm:space-x-4">
                             <button onclick="window.livewire.emit('openModal', 'booking.create-booking')"
                                 class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
                                 Pesan Kamar sekarang!
@@ -32,7 +74,7 @@
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="w-full md:w-1/2">

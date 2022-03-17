@@ -6,11 +6,10 @@ use App\Models\Kamar;
 use App\Models\Reservasi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
-use LivewireUI\Modal\ModalComponent;
 
-class CreateBooking extends ModalComponent
+class Booking extends Component
 {
-    public $nama_tamu, $nama_pemesan, $no_tlp, $email, $tipe_kamar, $jumlah_kamar, $tgl_checkin, $tgl_checkout;
+    public $nama_tamu, $nama_pemesan, $no_tlp, $email, $tipe_kamar, $jumlah_kamar, $tglCheckin, $tglCheckout;
 
     protected $rules = [
         'nama_tamu' => 'required',
@@ -34,11 +33,6 @@ class CreateBooking extends ModalComponent
         'tgl_checkout.required' => 'Tanggal Checkout tidak boleh kosong',
     ];
 
-    public static function modalMaxWidth(): string
-    {
-        return '4xl';
-    }
-
     public function store()
     {
         $this->validate();
@@ -57,11 +51,6 @@ class CreateBooking extends ModalComponent
         return $this->unduhPDF($reservasi);
     }
 
-    public function cancel()
-    {
-        $this->closeModal();
-    }
-
     public function unduhPDF($reservasi)
     {
         $pdf = PDF::loadView('home.layouts.pdf.buktiReservasi', compact('reservasi'))->setPaper('a4', 'landscape')->output();
@@ -71,19 +60,10 @@ class CreateBooking extends ModalComponent
         );
     }
 
-    public function bookingDate()
-    {
-        $date = [
-            'tgl_checkin' => $this->tgl_checkin,
-            'tgl_checkout' => $this->tgl_checkout,
-        ];
-        return dd($date);
-    }
-
     public function render()
     {
         $reservasis = Reservasi::all();
         $kamars = Kamar::all();
-        return view('livewire.booking.create-booking', ['reservasis' => $reservasis, 'kamars' => $kamars]);
+        return view('livewire.booking.booking', ['reservasis' => $reservasis, 'kamars' => $kamars]);
     }
 }

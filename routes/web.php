@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Tamu\BookingController;
+use App\Http\Controllers\Tamu\GetDateController;
 use App\Http\Controllers\Tamu\ViewController;
+use App\Http\Livewire\Booking\CreateBooking;
 use App\Http\Livewire\Fasilitas\FasilitasC;
 use App\Http\Livewire\Kamar\KamarC;
 use App\Http\Livewire\Reservasi\ReservasiC;
@@ -24,9 +26,9 @@ Route::post('/login', LoginController::class);
 Route::get('/', function () {
     return view('/home.index');
 });
-Route::get('/buktiReservasi', function () {
-    return view('/home.layouts.pdf.buktiReservasi');
-});
+
+Route::resource('/booking', GetDateController::class);
+
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');
 
@@ -43,4 +45,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/kamar', KamarC::class)->name('kamar');
         Route::get('/fasilitas', FasilitasC::class)->name('fasilitas');
     });
+});
+
+Route::get('/buktiReservasi', function () {
+    return view('/home.layouts.pdf.buktiReservasi');
 });

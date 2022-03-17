@@ -5,7 +5,6 @@
         <div class="mx-auto container p-8">
             <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-4 ml-4">Our Rooms</h2>
             <div class="flex flex-wrap items-center sm:gap-6 justify-center py-4">
-                <!-- Card-->
                 @foreach ($kamar as $rooms)
                     <div class="mx-2 w-96 mb-8 hover:shadow-2xl transition-all">
                         <div>
@@ -36,11 +35,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Card Ends -->
                 @endforeach
             </div>
         </div>
     </div>
-
-
 @endsection
