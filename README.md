@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://banners.beyondco.de/Hotel%20Reservation.png?theme=light&packageManager=&packageName=github.com%2Fyafikramadhan%2FHotelReserv&pattern=architect&style=style_1&description=a+simple+hotel+booking+built+with+Laravel&md=1&showWatermark=0&fontSize=100px&images=office-building"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
