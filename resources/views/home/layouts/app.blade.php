@@ -34,8 +34,11 @@
             }
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     @livewire('livewire-ui-modal')
     <script src="https://unpkg.com/flowbite@1.3.4/dist/datepicker.js"></script>
+    @stack('js')
 </body>
 
 </html>

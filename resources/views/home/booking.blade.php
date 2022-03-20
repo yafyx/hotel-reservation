@@ -160,14 +160,8 @@
                                         <div class="relative z-0 mb-6 w-full group">
                                             <label class="block mb-2 text-sm font-medium text-gray-900">
                                                 Nama Pemesan</label>
-                                            <input type="text" name="nama_pemesan" value="{{ old('nama_pemesan') }}"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                required>
-                                        </div>
-                                        <div class="relative z-0 mb-6 w-full group">
-                                            <label class="block mb-2 text-sm font-medium text-gray-900">
-                                                Nama Tamu</label>
-                                            <input type="text" name="nama_tamu" value="{{ old('nama_tamu') }}"
+                                            <input type="text" id="nama_pemesan" name="nama_pemesan"
+                                                value="{{ old('nama_pemesan') }}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 required>
                                         </div>
@@ -186,6 +180,23 @@
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 required>
                                         </div>
+                                        <label class="flex relative items-center mb-4 cursor-pointer">
+                                            <input type="checkbox" id="toggleNama" class="sr-only">
+                                            <div
+                                                class="w-11 h-6 bg-gray-200 rounded-full border border-gray-200 toggle-bg dark:bg-gray-700 dark:border-gray-600">
+                                            </div>
+                                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                Sama seperti pemesan
+                                            </span>
+                                        </label>
+                                        <div class="relative z-0 mb-6 w-full group">
+                                            <label class="block mb-2 text-sm font-medium text-gray-900">
+                                                Nama Tamu</label>
+                                            <input type="text" id="nama_tamu" name="nama_tamu"
+                                                value="{{ old('nama_tamu') }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                required>
+                                        </div>
                                     </div>
                                 </div>
                                 <div x-show.transition.in="step === 2">
@@ -195,14 +206,14 @@
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
                                                     kamar</label>
-                                                <input type="number" name="jumlah_kamar" value="1" min="1"
+                                                <input type="number" name="jumlah_kamar" value="1" min="1" id="jumlahKamar"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             </div>
                                             <div class="relative col-span-2 z-0 mb-6 w-full group">
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
                                                     kamar</label>
-                                                <select name="tipe_kamar"
+                                                <select name="tipe_kamar" id="tipeKamar"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     <option selected value="">Pilih tipe</option>
                                                     @foreach ($kamars as $kamar)
@@ -219,7 +230,7 @@
                                     </div>
                                 </div>
                                 <div x-show.transition.in="step === 3">
-                                    <div class="p-4 h-96 mt-2">
+                                    <div class="p-4 h-96 mt-2 hidden">
                                         <div class="relative z-0 mb-6 w-full group">
                                             <label for="email"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -239,7 +250,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-4 flex rounded-b" x-show="step != 'complete'">
+                            <div class="p-4 mt-4 flex rounded-b" x-show="step != 'complete'">
                                 <div class="w-1/2">
                                     <button x-show="step > 1" @click="step--" type="button"
                                         class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Sebelumnya</button>
@@ -298,6 +309,20 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <div id="selectedKamar" x-show="hidden"
+                            class="flex flex-row items-center bg-white rounded-lg border-2 m-6">
+                            <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                src="https://images.unsplash.com/flagged/photo-1556438758-8d49568ce18e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                                alt="">
+                            <div class="flex flex-row space-x-2 justify-between p-4 leading-normal">
+                                <h5 id="jumlahKamarVal" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+
+                                </h5>
+                                <h5 id="tipeKamarTitle" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                </h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,3 +330,36 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('#toggleNama').attr('disabled', true);
+        });
+
+        $('#nama_pemesan').on('input', function() {
+            $('#toggleNama').removeAttr('disabled');
+        });
+
+        $('#toggleNama').change(function() {
+            if ($(this).is(':checked')) {
+                $('#nama_tamu').val($('#nama_pemesan').val());
+            } else {
+                $('#nama_tamu').val('');
+            }
+        });
+
+        $('#jumlahKamar').change(function() {
+            $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
+        });
+
+        $('#tipeKamar').change(function() {
+            $('#selectedKamar').show();
+            $('#tipeKamarTitle').text($('#tipeKamar option:selected').text());
+            $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
+
+            if ($('#tipeKamar').val() == '') {
+                $('#selectedKamar').hide();
+            }
+        });
+    </script>
+@endpush
