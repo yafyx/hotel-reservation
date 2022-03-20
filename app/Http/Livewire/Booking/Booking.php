@@ -62,8 +62,7 @@ class Booking extends Component
 
     public function render()
     {
-        $reservasis = Reservasi::all();
         $kamars = Kamar::all();
-        return view('livewire.booking.booking', ['reservasis' => $reservasis, 'kamars' => $kamars]);
+        return view('home.booking', ['kamars' => $kamars]);
     }
 }

@@ -27,7 +27,7 @@ Route::get('/', function () {
     return view('/home.index');
 });
 
-Route::resource('/booking', GetDateController::class);
+Route::resource('/booking', BookingController::class);
 
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');

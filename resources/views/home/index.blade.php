@@ -4,7 +4,7 @@
     <section class="px-2 pb-32 pt-10 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
             <form action="{{ route('booking.create') }}" method="PUT">
-                @csrf
+                {{-- y-m-d --}}
                 <div
                     class="flex justify-evenly p-4 w-full text-center bg-white rounded-lg border shadow-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                     <div date-rangepicker="" datepicker-buttons datepicker-format="d M y" class="flex items-center">
@@ -17,7 +17,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input name="tgl_checkin" type="text" autocomplete="off" wire:model="tgl_checkin"
+                            <input name="tgl_checkin" type="text" autocomplete="off"
                                 class="
                             bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                 placeholder="Pilih tanggal check-in">
@@ -32,7 +32,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input name="tgl_checkout" type="text" autocomplete="off" wire:model="tgl_checkout"
+                            <input name="tgl_checkout" type="text" autocomplete="off"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input"
                                 placeholder="Pilih tanggal check-out">
                         </div>

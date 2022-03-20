@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ReservasiSeeder extends Seeder
 {
@@ -16,9 +17,9 @@ class ReservasiSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 1; $i++) {
             DB::table('reservasis')->insert(array(
-                'booking_id' => $faker->date('YmdHis') . $faker->numberBetween(1, 3),
+                'uuid' => Str::uuid(),
                 'nama_tamu' => $faker->name,
                 'nama_pemesan' => $faker->name,
                 'email' => $faker->email,
