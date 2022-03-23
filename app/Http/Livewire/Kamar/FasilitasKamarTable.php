@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Kamar;
 
-use App\Models\Kamar;
+use App\Models\FasilitasKamar;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,12 +14,15 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\Rule;
 
-final class KamarTable extends PowerGridComponent
+final class FasilitasKamarTable extends PowerGridComponent
 {
     use ActionButton;
 
     //Messages informing success/error data is updated.
     public bool $showUpdateMessages = true;
+
+    public string $sortField = 'fasilitas_kamars.nama_fasilitas';
+
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +39,8 @@ final class KamarTable extends PowerGridComponent
             ->showExportOption('download', ['excel', 'csv']);
     }
 
+
+
     /*
     |--------------------------------------------------------------------------
     |  Datasource
@@ -47,11 +52,11 @@ final class KamarTable extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\User>|null
+     * @return  \Illuminate\Database\Eloquent\Builder<\App\Models\FasilitasKamar>|null
      */
     public function datasource(): ?Builder
     {
-        return Kamar::query();
+        return FasilitasKamar::query();
     }
 
     /*
@@ -82,15 +87,7 @@ final class KamarTable extends PowerGridComponent
     */
     public function addColumns(): ?PowerGridEloquent
     {
-        return PowerGrid::eloquent()
-            ->addColumn('id')
-            ->addColumn('tipe_kamar')
-            ->addColumn('deskripsi_kamar')
-            ->addColumn('fasilitas', function ($fasilitas) {
-                return implode(', ', json_decode($fasilitas->fasilitas));
-            })
-            ->addColumn('gambar')
-            ->addColumn('jumlah_kamar');
+        return PowerGrid::eloquent();
     }
 
     /*
@@ -106,9 +103,9 @@ final class KamarTable extends PowerGridComponent
     {
         return [
             Button::add('create')
-                ->caption(__('Tambah kamar'))
+                ->caption(__('Tambah Fasilitas'))
                 ->class('block cursor-pointer text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br shadow-lg shadow-lime-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
-                ->openModal('kamar.create-kamar', []),
+                ->openModal('kamar.create-fasilitas-kamar', []),
         ];
     }
 
@@ -121,45 +118,9 @@ final class KamarTable extends PowerGridComponent
     {
         return [
             Column::add()
-                ->title('ID')
-                ->field('id')
-                ->hidden()
-                ->makeInputRange(),
-
-
-            Column::add()
-                ->title('TIPE KAMAR')
-                ->field('tipe_kamar')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-            Column::add()
-                ->title('Deskripsi KAMAR')
-                ->field('deskripsi_kamar')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-            Column::add()
-                ->title('FASILITAS')
-                ->field('fasilitas')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
-
-            Column::add()
-                ->title('GAMBAR')
-                ->field('gambar')
-                ->sortable()
-                ->searchable(),
-
-            Column::add()
-                ->title('JUMLAH KAMAR')
-                ->field('jumlah_kamar')
-                ->sortable()
-                ->searchable()
-                ->makeInputText(),
+                ->title('Nama fasilitas')
+                ->field('nama_fasilitas')
+                ->sortable(),
         ];
     }
 
@@ -172,11 +133,10 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Action Buttons.
+     * PowerGrid FasilitasKamar Action Buttons.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
      */
-
 
     public function actions(): array
     {
@@ -184,30 +144,22 @@ final class KamarTable extends PowerGridComponent
             Button::add('edit')
                 ->caption(__('Edit'))
                 ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
-                ->openModal('kamar.edit-kamar', [
-                    'kamarId' => 'id',
-                    'tipeKamar' => 'tipe_kamar',
-                    'deskripsiKamar' => 'deskripsi_kamar',
-                    'fasilitas' => 'fasilitas',
-                    'gambar' => 'gambar',
-                    'jumlahKamar' => 'jumlah_kamar',
+                ->openModal('kamar.edit-fasilitas-kamar', [
+                    'fasilitasKamarId' => 'id',
+                    'namaFasilitas' => 'nama_fasilitas',
                 ]),
 
             Button::add('destroy')
                 ->caption('Delete')
                 ->class('text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
-                ->openModal('kamar.delete-kamar', [
-                    'kamarId' => 'id',
-                    'tipeKamar' => 'tipe_kamar',
-                    'fasilitas' => 'fasilitas',
-                    'gambar' => 'gambar',
-                    'jumlahKamar' => 'jumlah_kamar',
-                    'confirmationTitle'       => 'Hapus data kamar',
-                    'confirmationDescription' => 'Apakah kamu yakin ingin menghapus data kamar ini?',
+                ->openModal('kamar.delete-fasilitas-kamar', [
+                    'fasilitasKamarId' => 'id',
+                    'namaFasilitas' => 'nama_fasilitas',
+                    'confirmationTitle'       => 'Hapus fasilitas',
+                    'confirmationDescription' => 'Apakah kamu yakin ingin menghapus fasilitas ini?',
                 ]),
         ];
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -218,7 +170,7 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Action Rules.
+     * PowerGrid FasilitasKamar Action Rules.
      *
      * @return array<int, \PowerComponents\LivewirePowerGrid\Rules\RuleActions>
      */
@@ -230,7 +182,7 @@ final class KamarTable extends PowerGridComponent
            
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($kamar) => $kamar->id === 1)
+                ->when(fn($fasilitas-kamar) => $fasilitas-kamar->id === 1)
                 ->hide(),
         ];
     }
@@ -246,7 +198,7 @@ final class KamarTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Kamar Update.
+     * PowerGrid FasilitasKamar Update.
      *
      * @param array<string,string> $data
      */
@@ -255,7 +207,7 @@ final class KamarTable extends PowerGridComponent
     public function update(array $data ): bool
     {
        try {
-           $updated = Kamar::query()->findOrFail($data['id'])
+           $updated = FasilitasKamar::query()->findOrFail($data['id'])
                 ->update([
                     $data['field'] => $data['value'],
                 ]);

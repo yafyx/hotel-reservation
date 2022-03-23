@@ -20,9 +20,10 @@ class KamarSeeder extends Seeder
         for ($i = 1; $i <= 3; $i++) {
             DB::table('kamars')->insert(array(
                 'tipe_kamar' => $faker->randomElement(['Standar', 'Deluxe', 'King Suites']),
-                'jumlah_kamar' => $faker->numberBetween(5, 200),
-                'fasilitas' => $faker->randomElement(['TV, Meja, Kamar mandi, Lemari es.', 'Desain lebih menarik, ditempatkan di area yang lebih baik dibandingkan standar dan superior room', 'Lebih luas, Fasilitas terbaik']),
+                'deskripsi_kamar' => $faker->text(200),
+                'fasilitas' => $faker->text(200),
                 'gambar' => $faker->numberBetween(1, 3),
+                'jumlah_kamar' => $faker->numberBetween(5, 200),
             ));
         }
     }

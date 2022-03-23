@@ -100,7 +100,6 @@ final class ReservasiTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('booking_id')
             ->addColumn('nama_tamu', function ($reservasi) {
                 return $reservasi->nama_tamu;
             })
@@ -144,12 +143,6 @@ final class ReservasiTable extends PowerGridComponent
 
         return [
             Column::add()
-                ->title('Booking ID')
-                ->field('booking_id')
-                ->makeInputText('nama_tamu')
-                ->searchable(),
-
-            Column::add()
                 ->title('Nama tamu')
                 ->field('nama_tamu')
                 ->makeInputText('nama_tamu')
@@ -174,7 +167,6 @@ final class ReservasiTable extends PowerGridComponent
                 ->title('Check-in')
                 ->field('tgl_checkin')
                 ->editOnClick($canEdit)
-                ->hidden()
                 ->makeInputDatePicker()
                 ->searchable()
                 ->sortable(),
@@ -183,7 +175,6 @@ final class ReservasiTable extends PowerGridComponent
                 ->title('Check-out')
                 ->field('tgl_checkout')
                 ->editOnClick($canEdit)
-                ->hidden()
                 ->makeInputDatePicker()
                 ->searchable()
                 ->sortable(),

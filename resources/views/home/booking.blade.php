@@ -11,7 +11,7 @@
                 @if ($errors->any())
                     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mx-6 mb-4" role="alert">
                         <p class="font-bold">
-                            Upss ada yang salah!:
+                            Terdapat kesalahan
                         </p>
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -88,10 +88,10 @@
                                                     <div class="mt-3 sm:pr-8">
                                                         <h3 x-show="step === 1" x-if="step === 1"
                                                             class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                            Data diri</h3>
+                                                            Pilih kamar</h3>
                                                         <h3 x-show="step !== 1"
                                                             class="text-lg font-semibold text-gray-400 dark:text-white">
-                                                            Data diri</h3>
+                                                            Pilih kamar</h3>
                                                     </div>
                                                 </li>
                                                 <li class="relative mb-6 sm:mb-0 w-full">
@@ -116,10 +116,10 @@
                                                     <div class="mt-3 sm:pr-8">
                                                         <h3 x-show="step === 2" x-if="step === 2"
                                                             class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                            Memilih kamar</h3>
+                                                            Data pemesan</h3>
                                                         <h3 x-show="step !== 2"
                                                             class="text-lg font-semibold text-gray-400 dark:text-white">
-                                                            Memilih kamar</h3>
+                                                            Data pemesan</h3>
                                                     </div>
                                                 </li>
                                                 <li class="relative mb-6 sm:mb-0 w-full">
@@ -156,6 +156,38 @@
                                 </div>
 
                                 <div x-show.transition.in="step === 1">
+                                    <div class="p-4 h-96 mt-2 flex justify-center items-center">
+                                        <div class="grid">
+                                            <div class="relative col-start-2 z-0 mb-6 w-full group">
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
+                                                    kamar</label>
+                                                <input type="number" name="jumlah_kamar" value="1" min="1" id="jumlahKamar"
+                                                    value="{{ old('jumlah_kamar') }}" required
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            </div>
+
+                                            <div class="relative col-span-3 z-0 mb-6 w-full group">
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
+                                                    kamar</label>
+                                                <select name="tipe_kamar" id="tipeKamar" required
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <option selected value="">Pilih tipe</option>
+                                                    @foreach ($kamars as $kamar)
+                                                        <option value="{{ $kamar->id }}">
+                                                            {{ $kamar->tipe_kamar }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
+                                                    memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
+                                                    dalam 1 kali pemesanan.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div x-show.transition.in="step === 2">
                                     <div class="p-4 h-96 mt-2">
                                         <div class="relative z-0 mb-6 w-full group">
                                             <label class="block mb-2 text-sm font-medium text-gray-900">
@@ -199,36 +231,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div x-show.transition.in="step === 2">
-                                    <div class="p-4 h-96 mt-2 flex items-center ">
-                                        <div class="grid xl:grid-cols-3 xl:gap-6">
-                                            <div class="relative z-0 mb-6 w-full group">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
-                                                    kamar</label>
-                                                <input type="number" name="jumlah_kamar" value="1" min="1" id="jumlahKamar"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            </div>
-                                            <div class="relative col-span-2 z-0 mb-6 w-full group">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
-                                                    kamar</label>
-                                                <select name="tipe_kamar" id="tipeKamar"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                    <option selected value="">Pilih tipe</option>
-                                                    @foreach ($kamars as $kamar)
-                                                        <option value="{{ $kamar->id }}">
-                                                            {{ $kamar->tipe_kamar }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
-                                                    memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
-                                                    dalam 1 kali pemesanan.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div x-show.transition.in="step === 3">
                                     <div class="p-4 h-96 mt-2 hidden">
                                         <div class="relative z-0 mb-6 w-full group">
@@ -248,9 +250,17 @@
                                                 required>
                                         </div>
                                     </div>
+                                    <div class="p-4 h-96 mt-2 flex flex-col justify-center items-center">
+                                        <p class="font-bold text-lg">
+                                            Mohon cek kembali data anda sebelum melanjutkan!
+                                        </p>
+                                        <p class="">
+                                            Jika sudah yakin dengan data anda, klik tombol Konfirmasi.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="p-4 mt-4 flex rounded-b" x-show="step != 'complete'">
+                            <div class="p-4 mt-4 flex rounded-b">
                                 <div class="w-1/2">
                                     <button x-show="step > 1" @click="step--" type="button"
                                         class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-800">Sebelumnya</button>
@@ -260,7 +270,7 @@
                                     <button x-show="step < 3" @click="step++" type="button"
                                         class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Selanjutnya</button>
 
-                                    <button @click="step = 'complete'" x-show="step === 3" type="submit"
+                                    <button x-show="step === 3" type="submit" id="konfirmasiBooking"
                                         class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                         Konfirmasi</button>
                                 </div>

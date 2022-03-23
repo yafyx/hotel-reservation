@@ -38,7 +38,7 @@
                                 </p>
                             </div>
                         </a>
-                        <a href="{{ route('admin.kamar') }}"
+                        <a href="{{ route('admin.kamar.tipe') }}"
                             class="flex flex-col items-center w-full bg-gray-100 border shadow-md hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                                 src="/docs/images/blog/image-4.jpg" alt="">

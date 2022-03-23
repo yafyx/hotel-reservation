@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Tamu\BookingController;
-use App\Http\Controllers\Tamu\GetDateController;
 use App\Http\Controllers\Tamu\ViewController;
-use App\Http\Livewire\Booking\CreateBooking;
 use App\Http\Livewire\Fasilitas\FasilitasC;
-use App\Http\Livewire\Kamar\KamarC;
+use App\Http\Livewire\Kamar\FasilitasKamar;
+use App\Http\Livewire\Kamar\TipeKamar;
 use App\Http\Livewire\Reservasi\ReservasiC;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +41,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
 
     Route::middleware('CheckRole:admin')->name('admin.')->prefix('admin')->group(function () {
-        Route::get('/kamar', KamarC::class)->name('kamar');
+        Route::get('/kamar/tipe', TipeKamar::class)->name('kamar.tipe');
+        Route::get('/kamar/fasilitas', FasilitasKamar::class)->name('kamar.fasilitas');
         Route::get('/fasilitas', FasilitasC::class)->name('fasilitas');
     });
 });

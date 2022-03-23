@@ -1,5 +1,4 @@
 require("./bootstrap");
-
 import "flowbite";
 import Alpine from "alpinejs";
 

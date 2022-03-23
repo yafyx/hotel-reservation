@@ -16,6 +16,8 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/iziToast.js') }}"></script>
     @livewireScripts
     @powerGridScripts
@@ -43,6 +45,8 @@
     </div>
     @livewire('livewire-ui-modal')
     @include('vendor.lara-izitoast.toast')
+
+    @stack('js')
 </body>
 
 </html>

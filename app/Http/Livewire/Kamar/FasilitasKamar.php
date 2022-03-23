@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Kamar;
 
 use Livewire\Component;
 
-class KamarC extends Component
+class FasilitasKamar extends Component
 {
     public function render()
     {
-        return view('rooms');
+        return view('room_facility');
     }
 }

@@ -2,17 +2,20 @@
 
 namespace App\Http\Livewire\Kamar;
 
+use App\Models\FasilitasKamar;
 use App\Models\Kamar;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class CreateKamar extends ModalComponent
 {
-    public $tipeKamar, $fasilitas, $gambar, $jumlahKamar;
+    public $tipeKamar, $deskripsi_kamar, $gambar, $jumlahKamar;
+    public $selectedFasilitas = [];
 
     protected $rules = [
         'tipeKamar' => 'required',
-        'fasilitas' => 'required',
+        'deskripsi_kamar' => 'required',
+        'selectedFasilitas' => 'required',
         'jumlahKamar' => 'required|numeric',
     ];
 
@@ -33,7 +36,8 @@ class CreateKamar extends ModalComponent
         $this->validate();
         Kamar::create([
             'tipe_kamar' => $this->tipeKamar,
-            'fasilitas' => $this->fasilitas,
+            'deskripsi_kamar' => $this->deskripsi_kamar,
+            'fasilitas' => json_encode($this->selectedFasilitas),
             'gambar' => '1',
             'jumlah_kamar' => $this->jumlahKamar,
         ]);
@@ -55,6 +59,7 @@ class CreateKamar extends ModalComponent
     public function render()
     {
         $kamars = Kamar::all();
-        return view('livewire.kamar.create-kamar', ['kamars' => $kamars]);
+        $fasilitas = FasilitasKamar::all();
+        return view('livewire.kamar.create-kamar', ['kamars' => $kamars, 'fasilitas' => $fasilitas]);
     }
 }

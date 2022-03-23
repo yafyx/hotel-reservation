@@ -2,24 +2,28 @@
 
 namespace App\Http\Livewire\Kamar;
 
+use App\Models\FasilitasKamar;
 use App\Models\Kamar;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class EditKamar extends ModalComponent
 {
-    public $kamarId, $tipeKamar, $fasilitas, $gambar, $jumlahKamar;
+    public $kamarId, $deskripsiKamar, $tipeKamar, $gambar, $jumlahKamar;
+    public $selectedFasilitas = [];
 
     protected $rules = [
         'tipeKamar' => 'required',
-        'fasilitas' => 'required',
+        'deskripsiKamar' => 'required',
+        'selectedFasilitas' => 'required',
         'gambar' => 'required',
         'jumlahKamar' => 'required|numeric',
     ];
 
     protected $messages = [
         'tipeKamar.required' => 'Tipe Kamar harus diisi',
-        'fasilitas.required' => 'Fasilitas harus diisi',
+        'deskripsiKamar.required' => 'Deskripsi Kamar harus diisi',
+        'selectedFasilitas.required' => 'Fasilitas harus diisi',
         'gambar.required' => 'Gambar harus diisi',
         'jumlahKamar.required' => 'Jumlah Kamar harus diisi',
         'jumlahKamar.numeric' => 'Jumlah Kamar harus berupa angka',
@@ -31,7 +35,8 @@ class EditKamar extends ModalComponent
         $kamar = Kamar::find($kamarId);
         $kamar->update([
             'tipe_kamar' => $this->tipeKamar,
-            'fasilitas' => $this->fasilitas,
+            'deskripsi_kamar' => $this->deskripsiKamar,
+            'fasilitas' => json_encode($this->selectedFasilitas),
             'gambar' => $this->gambar,
             'jumlah_kamar' => $this->jumlahKamar,
         ]);
@@ -68,6 +73,7 @@ class EditKamar extends ModalComponent
     public function render()
     {
         $kamar = Kamar::find($this->kamarId);
-        return view('livewire.kamar.edit-kamar', ['kamar' => $kamar]);
+        $fasilitas = FasilitasKamar::all();
+        return view('livewire.kamar.edit-kamar', ['kamar' => $kamar, 'fasilitas' => $fasilitas]);
     }
 }

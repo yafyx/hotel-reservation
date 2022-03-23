@@ -9,10 +9,29 @@
         </div>
         <div class="mb-6">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                Deskripsi kamar
+            </label>
+            <textarea rows="4" wire:model="deskripsi_kamar"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </textarea>
+        </div>
+        <div class="mb-6">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
                 Fasilitas
             </label>
-            <textarea rows="4" wire:model="fasilitas"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+
+            <fieldset>
+                @foreach ($fasilitas as $item)
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" wire:model.defer="selectedFasilitas"
+                            value="{{ $item->nama_fasilitas }}"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            checked="">
+                        <label for="checkbox-1" class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            {{ $item->nama_fasilitas }}</label>
+                    </div>
+                @endforeach
+            </fieldset>
         </div>
         <div class="mb-6">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Upload
