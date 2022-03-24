@@ -1383,9 +1383,6 @@ input:checked + .toggle-bg {
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
-.col-start-2 {
-  grid-column-start: 2;
-}
 .float-right {
   float: right;
 }
@@ -1869,6 +1866,9 @@ input:checked + .toggle-bg {
 }
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2775,6 +2775,10 @@ input:checked + .toggle-bg {
   --tw-text-opacity: 1;
   color: rgb(200 30 30 / var(--tw-text-opacity));
 }
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
@@ -3387,6 +3391,10 @@ input:checked + .toggle-bg {
 .dark .dark\:text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+.dark .dark\:text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(240 82 82 / var(--tw-text-opacity));
 }
 .dark .dark\:placeholder-gray-400::-moz-placeholder {
   --tw-placeholder-opacity: 1;

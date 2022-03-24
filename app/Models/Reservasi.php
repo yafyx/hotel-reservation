@@ -10,7 +10,9 @@ class Reservasi extends Model
     use HasFactory;
 
     protected $table = 'reservasis';
-    protected $guarded = [];
+    protected $guarded = [
+        'id', 'uuid'
+    ];
     protected $fillable = [
         'uuid',
         'nama_tamu',
@@ -19,6 +21,7 @@ class Reservasi extends Model
         'no_tlp',
         'id_kamar',
         'jumlah_kamar',
+        'permintaan_khusus',
         'tgl_checkin',
         'tgl_checkout',
         'status',

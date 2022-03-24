@@ -156,17 +156,8 @@
                                 </div>
 
                                 <div x-show.transition.in="step === 1">
-                                    <div class="p-4 h-96 mt-2 flex justify-center items-center">
+                                    <div class="p-4 h-96 mt-2">
                                         <div class="grid">
-                                            <div class="relative col-start-2 z-0 mb-6 w-full group">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
-                                                    kamar</label>
-                                                <input type="number" name="jumlah_kamar" value="1" min="1" id="jumlahKamar"
-                                                    value="{{ old('jumlah_kamar') }}" required
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            </div>
-
                                             <div class="relative col-span-3 z-0 mb-6 w-full group">
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
@@ -183,6 +174,52 @@
                                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
                                                     memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
                                                     dalam 1 kali pemesanan.</p>
+                                            </div>
+                                            <div class="grid gap-6 grid-cols-2 col-span-3">
+                                                <div class="relative z-0 mb-6 w-full group">
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
+                                                        kamar</label>
+                                                    <input type="number" name="jumlah_kamar" value="1" min="1"
+                                                        id="jumlahKamar" value="{{ old('jumlah_kamar') }}" required
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                </div>
+                                                <div class="relative z-0 mb-6 w-full group">
+                                                    <label
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                        Permintaan khusus
+                                                    </label>
+                                                    <fieldset>
+                                                        <div class="flex items-center mb-4">
+                                                            <input id="lantaiAtas" aria-describedby="lantaiAtas"
+                                                                name="permintaan_khusus[]" value="Lantai atas"
+                                                                type="checkbox"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="lantaiAtas"
+                                                                class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                Lantai Atas
+                                                            </label>
+                                                        </div>
+                                                        <div class="flex items-center mb-4">
+                                                            <input id="bebasRokok" aria-describedby="bebasRokok"
+                                                                name="permintaan_khusus[]" value="Bebas rokok"
+                                                                type="checkbox"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="bebasRokok"
+                                                                class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                Bebas asap rokok
+                                                            </label>
+                                                        </div>
+                                                        <div class="flex flex-col">
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                                Lainnya
+                                                            </label>
+                                                            <textarea rows="4" name="permintaan_khusus[]"
+                                                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -269,7 +306,6 @@
                                 <div class="w-1/2 text-right">
                                     <button x-show="step < 3" @click="step++" type="button"
                                         class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Selanjutnya</button>
-
                                     <button x-show="step === 3" type="submit" id="konfirmasiBooking"
                                         class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                         Konfirmasi</button>
@@ -327,7 +363,6 @@
                                 alt="">
                             <div class="flex flex-row space-x-2 justify-between p-4 leading-normal">
                                 <h5 id="jumlahKamarVal" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-
                                 </h5>
                                 <h5 id="tipeKamarTitle" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                                 </h5>

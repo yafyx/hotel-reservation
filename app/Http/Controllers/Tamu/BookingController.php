@@ -66,6 +66,7 @@ class BookingController extends Controller
         );
 
         if (!$validate->fails()) {
+            $permintaanKhusus = $request->input('permintaan_khusus');
             $reservasi =  Reservasi::create([
                 'uuid' => Str::uuid(),
                 'nama_tamu' => $request->nama_tamu,
@@ -74,6 +75,7 @@ class BookingController extends Controller
                 'no_tlp' => $request->no_tlp,
                 'id_kamar' => $request->tipe_kamar,
                 'jumlah_kamar' => $request->jumlah_kamar,
+                'permintaan_khusus' => json_encode($permintaanKhusus),
                 'tgl_checkin' => Carbon::createFromDate($request->tgl_checkin),
                 'tgl_checkout' => Carbon::createFromDate($request->tgl_checkout),
                 'tipe_kamar' => $request->tipe_kamar,
