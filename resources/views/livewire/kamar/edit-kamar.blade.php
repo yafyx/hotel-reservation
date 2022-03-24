@@ -24,13 +24,15 @@
                 <fieldset>
                     @foreach ($fasilitas as $item)
                         <div class="flex items-center mb-4">
-                            <input type="checkbox" wire:model.defer="selectedFasilitas"
-                                value="{{ $item->nama_fasilitas }}" @if ($item->nama_fasilitas == $selectedFasilitas) checked @endif
+                            <input type="checkbox" value="{{ $item->nama_fasilitas }}" wire:model="selectedFasilitas"
                                 class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="checkbox-1" class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                                 {{ $item->nama_fasilitas }}</label>
                         </div>
                     @endforeach
+                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        Sudah terpilih: {{ $fasilitasKamar }}
+                    </p>
                 </fieldset>
             </div>
             <div class="mb-6">

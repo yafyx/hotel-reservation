@@ -26,6 +26,7 @@ class ReservasiSeeder extends Seeder
                 'no_tlp' => $faker->phoneNumber,
                 'id_kamar' => $faker->numberBetween(1, 3),
                 'jumlah_kamar' => '1',
+                'permintaan_khusus' => $faker->sentence,
                 'tgl_checkin' => $faker->dateTimeBetween('-1 years', '-1 years'),
                 'tgl_checkout' => $faker->dateTimeBetween('-1 years', '+1 weeks'),
                 'status' => $faker->randomElement(['menunggu checkin', 'checkin', 'checkout', 'batal']),

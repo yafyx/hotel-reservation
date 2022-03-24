@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'name' => $faker->name,
                 'isAdmin' => $faker->boolean(50),
                 'email' => $faker->freeEmail,
-                'password' => Hash::make("pw123"),
+                'password' => Hash::make("password"),
             ));
         }
     }

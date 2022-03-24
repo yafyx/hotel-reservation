@@ -11,6 +11,7 @@ class EditKamar extends ModalComponent
 {
     public $kamarId, $deskripsiKamar, $tipeKamar, $gambar, $jumlahKamar;
     public $selectedFasilitas = [];
+    public $fasilitasKamar = [];
 
     protected $rules = [
         'tipeKamar' => 'required',

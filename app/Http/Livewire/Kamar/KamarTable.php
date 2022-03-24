@@ -188,7 +188,7 @@ final class KamarTable extends PowerGridComponent
                     'kamarId' => 'id',
                     'tipeKamar' => 'tipe_kamar',
                     'deskripsiKamar' => 'deskripsi_kamar',
-                    'fasilitas' => 'fasilitas',
+                    'fasilitasKamar' => 'fasilitas',
                     'gambar' => 'gambar',
                     'jumlahKamar' => 'jumlah_kamar',
                 ]),
@@ -199,7 +199,7 @@ final class KamarTable extends PowerGridComponent
                 ->openModal('kamar.delete-kamar', [
                     'kamarId' => 'id',
                     'tipeKamar' => 'tipe_kamar',
-                    'fasilitas' => 'fasilitas',
+                    'fasilitasKamar' => 'fasilitas',
                     'gambar' => 'gambar',
                     'jumlahKamar' => 'jumlah_kamar',
                     'confirmationTitle'       => 'Hapus data kamar',
