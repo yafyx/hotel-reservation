@@ -94,15 +94,16 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Reservasi $reservasi)
+    public function show($uuid)
     {
-        //
+        $reservasi = Reservasi::where('uuid', $uuid)->first();
+        return view('home.pdf.bookingDetail', compact('reservasi'));
     }
 
-
-    public function unduhPDF($request)
+    public function unduhPDF($uuid)
     {
-        $pdf = PDF::loadView('home.layouts.pdf.buktiReservasi', compact('reservasi'))->setPaper('a4', 'landscape')->output();
+        $reservasi = Reservasi::where('uuid', $uuid)->first();
+        $pdf = PDF::loadView('home.pdf.buktiReservasi', compact('reservasi'))->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(
             fn () => print($pdf),
             "buktiReservasi.pdf"
