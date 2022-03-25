@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
+            $table->string('booking_id')->uniqid();
             $table->string('nama_tamu');
             $table->string('nama_pemesan');
             $table->string('email');

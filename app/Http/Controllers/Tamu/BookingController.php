@@ -68,7 +68,7 @@ class BookingController extends Controller
         if (!$validate->fails()) {
             $permintaanKhusus = $request->input('permintaan_khusus');
             $reservasi =  Reservasi::create([
-                'uuid' => Str::uuid(),
+                'booking_id' => Str::random(8),
                 'nama_tamu' => $request->nama_tamu,
                 'nama_pemesan' => $request->nama_pemesan,
                 'email' => $request->email,
@@ -85,7 +85,7 @@ class BookingController extends Controller
                 ->withErrors($validate);
         }
 
-        return redirect()->route('booking.show', $reservasi->uuid);
+        return redirect()->route('booking.show', $reservasi->booking_id);
     }
 
     /**
@@ -94,15 +94,15 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show($booking_id)
     {
-        $reservasi = Reservasi::where('uuid', $uuid)->first();
+        $reservasi = Reservasi::where('booking_id', $booking_id)->first();
         return view('home.pdf.bookingDetail', compact('reservasi'));
     }
 
-    public function unduhPDF($uuid)
+    public function unduhPDF($booking_id)
     {
-        $reservasi = Reservasi::where('uuid', $uuid)->first();
+        $reservasi = Reservasi::where('booking_id', $booking_id)->first();
         $pdf = PDF::loadView('home.pdf.buktiReservasi', compact('reservasi'))->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(
             fn () => print($pdf),

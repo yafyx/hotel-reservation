@@ -11,10 +11,10 @@ class Reservasi extends Model
 
     protected $table = 'reservasis';
     protected $guarded = [
-        'id', 'uuid'
+        'id', 'booking_id'
     ];
     protected $fillable = [
-        'uuid',
+        'booking_id',
         'nama_tamu',
         'nama_pemesan',
         'email',

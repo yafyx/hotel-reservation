@@ -19,7 +19,7 @@ class ReservasiSeeder extends Seeder
         $faker = Faker::create('id_ID');
         for ($i = 1; $i <= 1; $i++) {
             DB::table('reservasis')->insert(array(
-                'uuid' => Str::uuid(),
+                'booking_id' => Str::random(8),
                 'nama_tamu' => $faker->name,
                 'nama_pemesan' => $faker->name,
                 'email' => $faker->email,

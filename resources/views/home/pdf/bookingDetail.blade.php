@@ -11,7 +11,8 @@
                     <p class="text-md mt-2 font-light">Jl. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque.
                     </p>
                     <div class="flex justify-end">
-                        <a href="{{ route('booking.unduhPDF', ['uuid' => $reservasi->uuid]) }}" target="_blank"
+                        <a href="{{ route('booking.unduhPDF', ['booking_id' => $reservasi->booking_id]) }}"
+                            target="_blank"
                             class="inline-flex items-center text-sm font-medium text-blue-500 hover:opacity-75 ">Unduh PDF
                             <svg class="ml-0.5 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor" aria-hidden="true">
@@ -27,17 +28,20 @@
                     <div class="grid grid-cols-3 grid-rows-3">
                         <div class="py-8 leading-6 space-y-4">
                             <p class="text-md">Booking ID</p>
-                            <p class="text-3xl font-bold">1000527378
+                            <p class="text-3xl font-bold">
+                                {{ $reservasi->booking_id }}
                             </p>
                         </div>
                         <div class="py-8 leading-6 space-y-4 text-right">
                             <p class="text-md font-light">Check-in</p>
-                            <p class="text-2xl">25 Oct 2015
+                            <p class="text-2xl">
+                                {{ \Carbon\Carbon::parse($reservasi->tgl_checkin)->format('d M Y') }}
                             </p>
                         </div>
                         <div class="py-8 leading-6 space-y-4 text-right">
                             <p class="text-md font-light">Check-out</p>
-                            <p class="text-2xl">25 Oct 2015
+                            <p class="text-2xl">
+                                {{ \Carbon\Carbon::parse($reservasi->tgl_checkout)->format('d M Y') }}
                             </p>
                         </div>
                         <div>

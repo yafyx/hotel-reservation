@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 Route::resource('/booking', BookingController::class);
 
-Route::get('/booking/{uuid}/unduhPDF', [BookingController::class, 'unduhPDF'])->name('booking.unduhPDF');
+Route::get('/booking/{booking_id}/unduhPDF', [BookingController::class, 'unduhPDF'])->name('booking.unduhPDF');
 
 Route::get('/rooms', [ViewController::class, 'roomIndex'])->name('rooms');
 Route::get('/facilities', [ViewController::class, 'facilitiesIndex'])->name('facilities');

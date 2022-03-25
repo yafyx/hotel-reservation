@@ -118,7 +118,7 @@
                         <tr>
                             <td>
                                 Booking ID<br>
-                                <span style="font-size: xx-large; font-weight: bold">
+                                <span style="font-size: xx-large; font-weight: bold; margin-bottom: 2px">
                                     {{ $reservasi->booking_id }}
                                 </span>
                             </td>
@@ -171,6 +171,16 @@
 
                 <td>
                     {{ $reservasi->jumlah_kamar }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Tambahan
+                </td>
+
+                <td>
+                    {{ implode(', ', json_decode($reservasi->permintaan_khusus)) }}
                 </td>
             </tr>
         </table>
