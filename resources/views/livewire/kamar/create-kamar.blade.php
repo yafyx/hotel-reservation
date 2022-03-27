@@ -35,11 +35,29 @@
         <div class="mb-6">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Upload
                 gambar</label>
-            <input
-                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            <input wire:model="images" multiple
+                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:border-transparent"
                 aria-describedby="user_avatar_help" id="user_avatar" type="file">
-            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A profile picture is
-                useful to confirm your are logged into your account</div>
+            <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">
+                Lorem ipsum dolor sit amet.
+            </div>
+            @if (is_array($images) || is_object($images))
+                @if ($images)
+                    <div class="row">
+                        @foreach ($images as $images)
+                            <div class="col-3 card me-1 mb-1">
+                                <img src="{{ $images->temporaryUrl() }}">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            @endif
+
+            @error('images')
+                <div class="text-red-500 text-sm mt-2">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div class="mb-6">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">

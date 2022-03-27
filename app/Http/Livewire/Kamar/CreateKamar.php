@@ -5,12 +5,16 @@ namespace App\Http\Livewire\Kamar;
 use App\Models\FasilitasKamar;
 use App\Models\Kamar;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 
 class CreateKamar extends ModalComponent
 {
-    public $tipeKamar, $deskripsi_kamar, $gambar, $jumlahKamar;
+    use WithFileUploads;
+
+    public $tipeKamar, $deskripsi_kamar, $jumlahKamar;
     public $selectedFasilitas = [];
+    public $images = [];
 
     protected $rules = [
         'tipeKamar' => 'required',
@@ -34,11 +38,18 @@ class CreateKamar extends ModalComponent
     public function store()
     {
         $this->validate();
+
+        foreach ($this->images as $key => $image) {
+            $this->images[$key] = $image->store('images');
+        }
+
+        $this->images = json_encode($this->images);
+
         Kamar::create([
             'tipe_kamar' => $this->tipeKamar,
             'deskripsi_kamar' => $this->deskripsi_kamar,
             'fasilitas' => json_encode($this->selectedFasilitas),
-            'gambar' => '1',
+            'gambar' => $this->images,
             'jumlah_kamar' => $this->jumlahKamar,
         ]);
 
