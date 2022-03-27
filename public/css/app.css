@@ -1494,6 +1494,9 @@ input:checked + .toggle-bg{
 .h-44{
   height: 11rem;
 }
+.h-32{
+  height: 8rem;
+}
 .min-h-screen{
   min-height: 100vh;
 }
@@ -1565,6 +1568,9 @@ input:checked + .toggle-bg{
 }
 .w-64{
   width: 16rem;
+}
+.w-32{
+  width: 8rem;
 }
 .min-w-0{
   min-width: 0px;

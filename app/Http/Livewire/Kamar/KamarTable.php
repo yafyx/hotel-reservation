@@ -196,7 +196,7 @@ final class KamarTable extends PowerGridComponent
                     'tipeKamar' => 'tipe_kamar',
                     'deskripsiKamar' => 'deskripsi_kamar',
                     'fasilitasKamar' => 'fasilitas',
-                    'gambar' => 'gambar',
+                    'images' => 'gambar',
                     'jumlahKamar' => 'jumlah_kamar',
                 ]),
 
@@ -207,7 +207,6 @@ final class KamarTable extends PowerGridComponent
                     'kamarId' => 'id',
                     'tipeKamar' => 'tipe_kamar',
                     'fasilitasKamar' => 'fasilitas',
-                    'gambar' => 'gambar',
                     'jumlahKamar' => 'jumlah_kamar',
                     'confirmationTitle'       => 'Hapus data kamar',
                     'confirmationDescription' => 'Apakah kamu yakin ingin menghapus data kamar ini?',

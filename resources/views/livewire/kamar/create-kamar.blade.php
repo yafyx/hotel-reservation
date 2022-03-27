@@ -39,7 +39,7 @@
                 class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none focus:border-transparent"
                 aria-describedby="user_avatar_help" id="user_avatar" type="file">
             <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">
-                Lorem ipsum dolor sit amet.
+                File yang diupload harus berupa gambar dengan format .jpg, .jpeg, .png, .gif, atau .svg.
             </div>
             @if (is_array($images) || is_object($images))
                 @if ($images)

@@ -19,6 +19,7 @@ class CreateKamar extends ModalComponent
     protected $rules = [
         'tipeKamar' => 'required',
         'deskripsi_kamar' => 'required',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
         'selectedFasilitas' => 'required',
         'jumlahKamar' => 'required|numeric',
     ];
@@ -26,6 +27,7 @@ class CreateKamar extends ModalComponent
     protected $messages = [
         'tipeKamar.required' => 'Tipe Kamar harus diisi',
         'fasilitas.required' => 'Fasilitas harus diisi',
+        'images.*.image' => 'File yang diupload harus berupa gambar',
         'jumlahKamar.required' => 'Jumlah Kamar harus diisi',
         'jumlahKamar.numeric' => 'Jumlah Kamar harus berupa angka',
     ];

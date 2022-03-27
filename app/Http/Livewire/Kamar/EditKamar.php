@@ -5,27 +5,30 @@ namespace App\Http\Livewire\Kamar;
 use App\Models\FasilitasKamar;
 use App\Models\Kamar;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use LivewireUI\Modal\ModalComponent;
 
 class EditKamar extends ModalComponent
 {
-    public $kamarId, $deskripsiKamar, $tipeKamar, $gambar, $jumlahKamar;
+    use WithFileUploads;
+
+    public $kamarId, $deskripsiKamar, $tipeKamar, $jumlahKamar;
     public $selectedFasilitas = [];
     public $fasilitasKamar = [];
+    public $images = [];
 
     protected $rules = [
         'tipeKamar' => 'required',
         'deskripsiKamar' => 'required',
-        'selectedFasilitas' => 'required',
-        'gambar' => 'required',
+        'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
         'jumlahKamar' => 'required|numeric',
     ];
 
     protected $messages = [
         'tipeKamar.required' => 'Tipe Kamar harus diisi',
         'deskripsiKamar.required' => 'Deskripsi Kamar harus diisi',
-        'selectedFasilitas.required' => 'Fasilitas harus diisi',
-        'gambar.required' => 'Gambar harus diisi',
+        'images.*.image' => 'File yang diupload harus berupa gambar',
         'jumlahKamar.required' => 'Jumlah Kamar harus diisi',
         'jumlahKamar.numeric' => 'Jumlah Kamar harus berupa angka',
     ];
@@ -33,14 +36,29 @@ class EditKamar extends ModalComponent
     public function update($kamarId)
     {
         $this->validate();
+
+        foreach ($this->images as $key => $image) {
+            $this->images[$key] = $image->store('images', 'public');
+        }
+
+        $this->images = json_encode($this->images);
         $kamar = Kamar::find($kamarId);
+
+        if ($this->images != $kamar->gambar) {
+            $oldImages = json_decode($kamar->gambar);
+            foreach ($oldImages as $oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+        }
+
         $kamar->update([
             'tipe_kamar' => $this->tipeKamar,
             'deskripsi_kamar' => $this->deskripsiKamar,
             'fasilitas' => json_encode($this->selectedFasilitas),
-            'gambar' => $this->gambar,
+            'gambar' => $this->images,
             'jumlah_kamar' => $this->jumlahKamar,
         ]);
+
 
         $this->closeModalWithEvents([
             'pg:eventRefresh-default',
