@@ -40,7 +40,7 @@ class CreateKamar extends ModalComponent
         $this->validate();
 
         foreach ($this->images as $key => $image) {
-            $this->images[$key] = $image->store('images');
+            $this->images[$key] = $image->store('images', 'public');
         }
 
         $this->images = json_encode($this->images);

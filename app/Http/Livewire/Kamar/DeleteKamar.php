@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Kamar;
 use App\Models\Kamar;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteKamar extends ModalComponent
 {
@@ -30,7 +31,13 @@ class DeleteKamar extends ModalComponent
     public function confirm()
     {
         $this->kamarId;
-        Kamar::query()->find($this->kamarId)->delete();
+        $kamar = Kamar::query()->find($this->kamarId);
+
+        $kamar->delete();
+        $images = json_decode($kamar->gambar);
+        foreach ($images as $image) {
+            Storage::disk('public')->delete($image);
+        }
 
         $this->closeModalWithEvents([
             'pg:eventRefresh-default',

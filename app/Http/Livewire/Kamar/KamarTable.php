@@ -89,7 +89,14 @@ final class KamarTable extends PowerGridComponent
             ->addColumn('fasilitas', function ($fasilitas) {
                 return implode(', ', json_decode($fasilitas->fasilitas));
             })
-            ->addColumn('gambar')
+            ->addColumn('gambar', function ($kamar) {
+                $images = json_decode($kamar->gambar);
+                $html = '';
+                foreach ($images as $image) {
+                    $html .= '<img src="' . asset('storage/' . $image) . '" width="100" height="100">';
+                }
+                return $html;
+            })
             ->addColumn('jumlah_kamar');
     }
 
