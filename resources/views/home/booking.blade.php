@@ -156,13 +156,13 @@
                                 </div>
 
                                 <div x-show.transition.in="step === 1">
-                                    <div class="p-4 h-96 mt-2">
+                                    <div class="p-4 mt-2">
                                         <div class="grid">
                                             <div class="relative col-span-3 z-0 mb-6 w-full group">
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
                                                     kamar</label>
-                                                <select name="tipe_kamar" id="tipeKamar" required
+                                                {{-- <select name="tipe_kamar" id="tipeKamar" required
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     <option selected value="">Pilih tipe</option>
                                                     @foreach ($kamars as $kamar)
@@ -170,7 +170,37 @@
                                                             {{ $kamar->tipe_kamar }}
                                                         </option>
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
+
+                                                <div class="space-y-4">
+                                                    @foreach ($kamars as $kamar)
+                                                        <div class="flex items-center">
+                                                            <input id="{{ $kamar->tipe_kamar }}" type="radio"
+                                                                name="tipe_kamar" value="{{ $kamar->id }}"
+                                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 tipeKamar"
+                                                                aria-labelledby="{{ $kamar->tipe_kamar }}"
+                                                                aria-describedby="{{ $kamar->tipe_kamar }}">
+                                                        </div>
+                                                        <div
+                                                            class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl mt-4">
+                                                            <img class="object-cover w-40 h-full rounded-t-lg"
+                                                                src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
+                                                                alt="">
+                                                            <div class="flex flex-col justify-between p-4 leading-normal">
+                                                                <h5
+                                                                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                                                    {{ $kamar->tipe_kamar }}</h5>
+                                                                <p
+                                                                    class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                                                    {{ $kamar->deskripsi_kamar }}</p>
+                                                            </div>
+                                                            <label for="{{ $kamar->tipe_kamar }}"
+                                                                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                                                Pilih kamar
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                                 <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
                                                     memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
                                                     dalam 1 kali pemesanan.</p>
@@ -313,7 +343,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-span-1 flex flex-col bg-white rounded-lg border shadow-md">
+                    <div class="flex flex-col h-min bg-white rounded-lg border shadow-md">
                         <div class="flex items-center mb-4 sm:px-6 pt-4">
                             <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none">
@@ -376,8 +406,7 @@
                         <div id="selectedKamar" x-show="hidden"
                             class="flex flex-row items-center bg-white rounded-lg border-2 m-6">
                             <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src="https://images.unsplash.com/flagged/photo-1556438758-8d49568ce18e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                                alt="">
+                                src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}" alt="">
                             <div class="flex flex-row space-x-2 justify-between p-4 leading-normal">
                                 <h5 id="jumlahKamarVal" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                                 </h5>
@@ -421,6 +450,15 @@
 
             if ($('#tipeKamar').val() == '') {
                 $('#selectedKamar').hide();
+            }
+        });
+
+        //if radio with name tipe_kamar is checked then show selectedKamar with image and title from id of name tipe_kamar
+        $('input[name="tipe_kamar"]').change(function() {
+            if ($(this).is(':checked')) {
+                $('#selectedKamar').show();
+                $('#tipeKamarTitle').text($(this).attr('id'));
+                $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
             }
         });
     </script>
