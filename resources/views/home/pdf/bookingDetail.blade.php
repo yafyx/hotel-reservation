@@ -2,7 +2,7 @@
 @section('title', 'Detail Booking')
 @section('content')
     <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center bg-no-repeat bg-cover"
-        style="background-image: url('https://images.unsplash.com/photo-1598966123988-ec87d15094b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1175&q=80')">
+        style="background-image: url('https://source.unsplash.com/random/?hotel')">
         <div class="relative py-3 mx-auto">
             <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20 bg-clip-padding bg-opacity-60 border border-gray-200"
                 style="backdrop-filter: blur(20px);">

@@ -12,11 +12,11 @@ class ViewController extends Controller
 {
     public function roomIndex()
     {
-        return view('home.rooms', ['kamar' => Kamar::select('tipe_kamar', 'fasilitas')->get()]);
+        return view('home.rooms', ['kamar' => Kamar::all()]);
     }
 
     public function facilitiesIndex()
     {
-        return view('home.facility', ['fasilitas' => Fasilitas::select('nama_fasilitas', 'gambar')->get()]);
+        return view('home.facility', ['fasilitas' => Fasilitas::all()]);
     }
 }

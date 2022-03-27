@@ -28,8 +28,10 @@ class BookingController extends Controller
         $tglCheckin = $request->input('tgl_checkin');
         $tglCheckout = $request->input('tgl_checkout');
 
+        $countNight = Carbon::parse($tglCheckin)->diffInDays(Carbon::parse($tglCheckout));
+
         $kamars = Kamar::all();
-        return view('home.booking', compact('tglCheckin', 'tglCheckout'), ['kamars' => $kamars]);
+        return view('home.booking', compact('tglCheckin', 'tglCheckout', 'countNight'), ['kamars' => $kamars]);
     }
 
     /**
