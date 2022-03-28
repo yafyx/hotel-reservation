@@ -177,13 +177,14 @@
                                                         <div class="flex items-center">
                                                             <input id="{{ $kamar->tipe_kamar }}" type="radio"
                                                                 name="tipe_kamar" value="{{ $kamar->id }}"
-                                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 tipeKamar"
+                                                                data-img="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
+                                                                class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 tipeKamar hidden"
                                                                 aria-labelledby="{{ $kamar->tipe_kamar }}"
                                                                 aria-describedby="{{ $kamar->tipe_kamar }}">
                                                         </div>
                                                         <div
                                                             class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl mt-4">
-                                                            <img class="object-cover w-40 h-full rounded-t-lg"
+                                                            <img id="imgKamar" class="object-cover w-40 h-full rounded-t-lg"
                                                                 src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
                                                                 alt="">
                                                             <div class="flex flex-col justify-between p-4 leading-normal">
@@ -405,8 +406,9 @@
 
                         <div id="selectedKamar" x-show="hidden"
                             class="flex flex-row items-center bg-white rounded-lg border-2 m-6">
-                            <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}" alt="">
+                            <img id="imgKamarSelected"
+                                class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                src="" alt="">
                             <div class="flex flex-row space-x-2 justify-between p-4 leading-normal">
                                 <h5 id="jumlahKamarVal" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                                 </h5>
@@ -453,12 +455,13 @@
             }
         });
 
-        //if radio with name tipe_kamar is checked then show selectedKamar with image and title from id of name tipe_kamar
         $('input[name="tipe_kamar"]').change(function() {
             if ($(this).is(':checked')) {
                 $('#selectedKamar').show();
                 $('#tipeKamarTitle').text($(this).attr('id'));
                 $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
+                $('#imgKamarSelected').attr('src', $(this).attr('data-img'));
+
             }
         });
     </script>
