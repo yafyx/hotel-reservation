@@ -159,9 +159,9 @@
                                     <div class="p-4 mt-2">
                                         <div class="grid">
                                             <div class="relative col-span-3 z-0 mb-6 w-full group">
-                                                <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Tipe
-                                                    kamar</label>
+                                                {{-- <label
+                                                    class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Tipe
+                                                    kamar</label> --}}
                                                 {{-- <select name="tipe_kamar" id="tipeKamar" required
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     <option selected value="">Pilih tipe</option>
@@ -171,7 +171,9 @@
                                                         </option>
                                                     @endforeach
                                                 </select> --}}
-
+                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
+                                                    memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
+                                                    dalam 1 kali pemesanan.</p>
                                                 <div class="space-y-4">
                                                     @foreach ($kamars as $kamar)
                                                         <div class="flex items-center">
@@ -182,29 +184,43 @@
                                                                 aria-labelledby="{{ $kamar->tipe_kamar }}"
                                                                 aria-describedby="{{ $kamar->tipe_kamar }}">
                                                         </div>
-                                                        <div
-                                                            class="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl mt-4">
-                                                            <img id="imgKamar" class="object-cover w-40 h-full rounded-t-lg"
-                                                                src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
-                                                                alt="">
-                                                            <div class="flex flex-col justify-between p-4 leading-normal">
-                                                                <h5
-                                                                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                                                                    {{ $kamar->tipe_kamar }}</h5>
-                                                                <p
-                                                                    class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                                                    {{ $kamar->deskripsi_kamar }}</p>
+                                                        <div class="bg-white rounded-lg border shadow-md mt-4">
+                                                            <div class="flex items-center flex-row justify-between">
+                                                                <div class="flex items-center">
+                                                                    <img id="imgKamar"
+                                                                        class="object-cover w-40 h-full rounded-t-lg"
+                                                                        src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
+                                                                        alt="">
+                                                                    <div
+                                                                        class="flex flex-col justify-between p-4 leading-normal">
+                                                                        <h5
+                                                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                                                            {{ $kamar->tipe_kamar }}</h5>
+                                                                        <p
+                                                                            class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                                                                            {{ $kamar->deskripsi_kamar }}</p>
+                                                                        <div class="">
+                                                                            @foreach (json_decode($kamar->fasilitas) as $item)
+                                                                                <span
+                                                                                    class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                                                                                    {{ $item }}
+                                                                                </span>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex">
+                                                                    <label for="{{ $kamar->tipe_kamar }}"
+                                                                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                                                        Pilih kamar
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            <label for="{{ $kamar->tipe_kamar }}"
-                                                                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                                                Pilih kamar
-                                                            </label>
+
+
                                                         </div>
                                                     @endforeach
                                                 </div>
-                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
-                                                    memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
-                                                    dalam 1 kali pemesanan.</p>
                                             </div>
                                             <div class="grid gap-6 grid-cols-2 col-span-3">
                                                 <div class="relative z-0 mb-6 w-full group">

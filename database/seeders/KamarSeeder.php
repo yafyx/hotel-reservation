@@ -22,6 +22,7 @@ class KamarSeeder extends Seeder
                 'tipe_kamar' => $faker->randomElement(['Standar', 'Deluxe', 'King Suites']),
                 'deskripsi_kamar' => $faker->text(200),
                 'fasilitas' => $faker->text(200),
+                'harga' => $faker->numberBetween(500000, 1000000),
                 'gambar' => $faker->numberBetween(1, 3),
                 'jumlah_kamar' => $faker->numberBetween(5, 200),
             ));

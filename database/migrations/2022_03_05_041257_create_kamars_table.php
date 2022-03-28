@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('tipe_kamar');
             $table->string('deskripsi_kamar');
             $table->longText('fasilitas');
+            $table->integer('harga');
             $table->string('gambar');
             $table->integer('jumlah_kamar');
             $table->timestamps();

@@ -89,6 +89,10 @@ final class KamarTable extends PowerGridComponent
             ->addColumn('fasilitas', function ($fasilitas) {
                 return implode(', ', json_decode($fasilitas->fasilitas));
             })
+            ->addColumn('harga')
+            ->addColumn('hargaKamar', function ($kamar) {
+                return 'Rp. ' . number_format($kamar->harga, 0, ',', '.');
+            })
             ->addColumn('gambar', function ($kamar) {
                 $images = json_decode($kamar->gambar);
                 $html = '';
@@ -156,6 +160,12 @@ final class KamarTable extends PowerGridComponent
                 ->makeInputText(),
 
             Column::add()
+                ->title('HARGA')
+                ->field('hargaKamar')
+                ->sortable()
+                ->searchable(),
+
+            Column::add()
                 ->title('GAMBAR')
                 ->field('gambar')
                 ->sortable()
@@ -196,6 +206,7 @@ final class KamarTable extends PowerGridComponent
                     'tipeKamar' => 'tipe_kamar',
                     'deskripsiKamar' => 'deskripsi_kamar',
                     'fasilitasKamar' => 'fasilitas',
+                    'harga' => 'harga',
                     'images' => 'gambar',
                     'jumlahKamar' => 'jumlah_kamar',
                 ]),

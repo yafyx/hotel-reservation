@@ -12,7 +12,7 @@ class CreateKamar extends ModalComponent
 {
     use WithFileUploads;
 
-    public $tipeKamar, $deskripsi_kamar, $jumlahKamar;
+    public $tipeKamar, $deskripsi_kamar, $harga, $jumlahKamar;
     public $selectedFasilitas = [];
     public $images = [];
 
@@ -51,6 +51,7 @@ class CreateKamar extends ModalComponent
             'tipe_kamar' => $this->tipeKamar,
             'deskripsi_kamar' => $this->deskripsi_kamar,
             'fasilitas' => json_encode($this->selectedFasilitas),
+            'harga' => $this->harga = str_replace('.', '', $this->harga),
             'gambar' => $this->images,
             'jumlah_kamar' => $this->jumlahKamar,
         ]);

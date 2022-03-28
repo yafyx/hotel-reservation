@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('id_kamar')->constrained('kamars')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('jumlah_kamar');
             $table->longText('permintaan_khusus');
+            $table->integer('total_harga');
             $table->dateTime('tgl_checkin');
             $table->dateTime('tgl_checkout');
             $table->enum('status', ['menunggu checkin', 'checkin', 'checkout', 'batal']);

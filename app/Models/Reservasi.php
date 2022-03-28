@@ -22,6 +22,7 @@ class Reservasi extends Model
         'id_kamar',
         'jumlah_kamar',
         'permintaan_khusus',
+        'total_harga',
         'tgl_checkin',
         'tgl_checkout',
         'status',

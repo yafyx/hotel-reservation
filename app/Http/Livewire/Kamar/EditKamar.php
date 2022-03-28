@@ -13,7 +13,7 @@ class EditKamar extends ModalComponent
 {
     use WithFileUploads;
 
-    public $kamarId, $deskripsiKamar, $tipeKamar, $jumlahKamar;
+    public $kamarId, $deskripsiKamar, $harga, $tipeKamar, $jumlahKamar;
     public $selectedFasilitas = [];
     public $fasilitasKamar = [];
     public $images = [];
