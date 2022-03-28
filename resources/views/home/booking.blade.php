@@ -171,7 +171,7 @@
                                                         </option>
                                                     @endforeach
                                                 </select> --}}
-                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya bisa
+                                                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Hanya dapat
                                                     memesan tipe kamar yang sama saat melakukan pemesanan lebih dari 1 kamar
                                                     dalam 1 kali pemesanan.</p>
                                                 <div class="space-y-4">
@@ -180,6 +180,7 @@
                                                             <input id="{{ $kamar->tipe_kamar }}" type="radio"
                                                                 name="tipe_kamar" value="{{ $kamar->id }}"
                                                                 data-img="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
+                                                                data-harga="{{ $kamar->harga }}"
                                                                 class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 tipeKamar hidden"
                                                                 aria-labelledby="{{ $kamar->tipe_kamar }}"
                                                                 aria-describedby="{{ $kamar->tipe_kamar }}">
@@ -209,15 +210,17 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="flex">
+                                                                <div class="flex flex-col mx-4">
+                                                                    <h5
+                                                                        class="mb-2 text-2xl bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 font-bold tracking-tight">
+                                                                        Rp. {{ number_format($kamar->harga) }}</h5>
+                                                                    </h5>
                                                                     <label for="{{ $kamar->tipe_kamar }}"
-                                                                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                                                        class="text-gray-900 text-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                                                         Pilih kamar
                                                                     </label>
                                                                 </div>
                                                             </div>
-
-
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -420,16 +423,31 @@
                             </ul>
                         </div>
 
-                        <div id="selectedKamar" x-show="hidden"
-                            class="flex flex-row items-center bg-white rounded-lg border-2 m-6">
-                            <img id="imgKamarSelected"
-                                class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src="" alt="">
-                            <div class="flex flex-row space-x-2 justify-between p-4 leading-normal">
-                                <h5 id="jumlahKamarVal" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                                </h5>
-                                <h5 id="tipeKamarTitle" class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                                </h5>
+                        <div id="selectedKamar" x-show="hidden" class="">
+                            <div class="flex flex-col bg-white rounded-lg border-2 m-6">
+                                <div class="flex flex-row items-center">
+                                    <img id="imgKamarSelected"
+                                        class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                        src="" alt="">
+                                    <div class="flex flex-col p-4 leading-normal">
+                                        <div class="flex flex-row space-x-2">
+                                            <h5 id="jumlahKamarVal"
+                                                class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                            </h5>
+                                            <h5 id="tipeKamarTitle"
+                                                class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                            </h5>
+                                        </div>
+
+                                        <p class="text-sm">
+                                            Total harga
+                                        </p>
+                                        <h5 id="totalHargaVal"
+                                            class="mb-2 text-2xl bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 font-bold tracking-tight">
+                                        </h5>
+                                        </h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -477,6 +495,16 @@
                 $('#tipeKamarTitle').text($(this).attr('id'));
                 $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
                 $('#imgKamarSelected').attr('src', $(this).attr('data-img'));
+                var harga = $(this).attr('data-harga');
+                var jumlahKamar = $('#jumlahKamar').val();
+                var totalHarga = harga * jumlahKamar;
+                $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
+
+                $('#jumlahKamar').change(function() {
+                    var jumlahKamar = $('#jumlahKamar').val();
+                    var totalHarga = harga * jumlahKamar;
+                    $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
+                });
 
             }
         });
