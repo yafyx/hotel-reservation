@@ -219,6 +219,24 @@
                                                                         class="text-gray-900 text-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                                                         Pilih kamar
                                                                     </label>
+                                                                    <button disabled x-show="show"
+                                                                        class="text-gray-900 text-center mx-auto bg-gray-200 border border-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2">
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 48 48" version="1"
+                                                                            enable-background="new 0 0 48 48">
+                                                                            <polygon fill="#43A047"
+                                                                                points="40.6,12.1 17,35.7 7.4,26.1 4.6,29 17,41.3 43.4,14.9">
+                                                                            </polygon>
+                                                                        </svg>
+                                                                    </button>
+
+                                                                    {{-- <label for="{{ $kamar->tipe_kamar }}"
+                                                                        @click="kamarSelected"
+                                                                        class="text-gray-900 text-center bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                                                        Pilih kamar
+                                                                    </label> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -336,14 +354,68 @@
                                                 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 required>
                                         </div>
+                                        <div class="relative z-0 mb-6 w-full group">
+                                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                Total harga</label>
+                                            <input type="text" name="total_harga" id="total_harga"
+                                                class="
+                                                bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                required>
+                                        </div>
                                     </div>
-                                    <div class="p-4 h-96 mt-2 flex flex-col justify-center items-center">
+                                    <div class="p-4 h-48 mt-2 flex flex-col justify-center items-center">
                                         <p class="font-bold text-lg">
                                             Mohon cek kembali data anda sebelum melanjutkan!
                                         </p>
                                         <p class="">
                                             Jika sudah yakin dengan data anda, klik tombol Konfirmasi.
                                         </p>
+                                    </div>
+                                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                            <thead
+                                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Product name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Color
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Category
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Price
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        <span class="sr-only">Edit</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
+                                                    <th scope="row"
+                                                        class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                        Apple MacBook Pro 17"
+                                                    </th>
+                                                    <td class="px-6 py-4">
+                                                        Sliver
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        Laptop
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        $2999
+                                                    </td>
+                                                    <td class="px-6 py-4 text-right">
+                                                        <a href="#"
+                                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -500,12 +572,13 @@
                 var totalHarga = harga * jumlahKamar;
                 $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
 
+
                 $('#jumlahKamar').change(function() {
                     var jumlahKamar = $('#jumlahKamar').val();
                     var totalHarga = harga * jumlahKamar;
+                    $('#total_harga').val(totalHarga);
                     $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
                 });
-
             }
         });
     </script>
