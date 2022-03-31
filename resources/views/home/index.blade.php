@@ -4,10 +4,10 @@
     <section class="px-2 pb-32 pt-10 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
             <form action="{{ route('booking.create') }}" method="PUT">
-                {{-- y-m-d --}}
                 <div
-                    class="flex justify-evenly p-4 w-full text-center bg-white rounded-lg border shadow-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    <div date-rangepicker="" datepicker-buttons datepicker-format="d M y" class="flex items-center">
+                    class="flex flex-col gap-y-4 sm:flex-row justify-evenly p-4 w-full text-center bg-white rounded-lg border shadow-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <div date-rangepicker="" datepicker-buttons datepicker-format="d M y"
+                        class="flex flex-col gap-y-4 items-center sm:flex-row">
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
@@ -183,17 +183,17 @@
     </div>
 
     <!-- Review -->
-    <section class="flex items-center justify-center py-16 bg-gray-100 min-w-screen">
-        <div class="max-w-6xl px-12 mx-auto bg-gray-100 md:px-16 xl:px-10">
+    <section class="flex items-center justify-center sm:py-16 bg-gray-100">
+        <div class="sm:px-12 py-16 px-4 mx-auto bg-gray-100">
             <div class="flex flex-col items-center lg:flex-row">
-                <div class="flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0 lg:w-1/2">
+                <div class="flex flex-col items-start justify-center w-full h-full pr-8 mb-10 lg:mb-0">
                     <h2
                         class="text-4xl font-extrabold leading-10 tracking-tight text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl">
                         Apa kata mereka?</h2>
                     <p class="my-6 text-lg text-gray-600">Kami sangat bangga dengan layanan yang kami tawarkan
                         kepada pelanggan kami. Baca setiap kata dari pelanggan kami yang senang.</p>
                 </div>
-                <div class="w-full lg:w-1/2">
+                <div class="w-full">
                     <blockquote class="flex items-center justify-between w-full col-span-1 p-6 bg-white rounded-lg shadow">
                         <div class="flex flex-col pr-8">
                             <div class="relative pl-12">

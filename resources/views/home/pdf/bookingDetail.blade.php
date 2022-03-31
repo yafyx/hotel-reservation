@@ -93,6 +93,14 @@
                                     {{ $reservasi->jumlah_kamar }}
                                 </p>
                             </div>
+                            <div class="flex justify-between my-2">
+                                <p>
+                                    Total harga
+                                </p>
+                                <p>
+                                    Rp. {{ number_format($reservasi->total_harga) }}</h5>
+                                </p>
+                            </div>
                             <div class="flex justify-between space-x-10">
                                 <p>
                                     Tambahan

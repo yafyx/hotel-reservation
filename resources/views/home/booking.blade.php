@@ -20,7 +20,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="container mx-auto p-6 pt-0 grid grid-cols-3 gap-4">
+                <div class="container mx-auto sm:p-6 pt-0 grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-4">
                     <div class="col-span-2 flex flex-col bg-white rounded-lg border border-gray-200 shadow-md p-4">
                         <form action="{{ route('booking.store') }}" method="POST">
                             @csrf
@@ -157,7 +157,7 @@
 
                                 <div x-show.transition.in="step === 1">
                                     <div class="p-4 mt-2">
-                                        <div class="grid">
+                                        <div class="flex flex-col sm:grid">
                                             <div class="relative col-span-3 z-0 mb-6 w-full group">
                                                 {{-- <label
                                                     class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-400">Tipe
@@ -181,13 +181,15 @@
                                                                 name="tipe_kamar" value="{{ $kamar->id }}"
                                                                 data-img="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
                                                                 data-harga="{{ $kamar->harga }}"
+                                                                data-jumlah="{{ $kamar->jumlah_kamar }}"
                                                                 class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 tipeKamar hidden"
                                                                 aria-labelledby="{{ $kamar->tipe_kamar }}"
                                                                 aria-describedby="{{ $kamar->tipe_kamar }}">
                                                         </div>
                                                         <div class="bg-white rounded-lg border shadow-md mt-4">
-                                                            <div class="flex items-center flex-row justify-between">
-                                                                <div class="flex items-center">
+                                                            <div
+                                                                class="flex items-center flex-col sm:flex-row justify-between">
+                                                                <div class="flex flex-col sm:flex-row items-center">
                                                                     <img id="imgKamar"
                                                                         class="object-cover w-40 h-full rounded-t-lg"
                                                                         src="{{ asset('storage/' . json_decode($kamar->gambar)[0]) }}"
@@ -210,7 +212,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="flex flex-col mx-4">
+                                                                <div class="flex flex-col my-4 sm:mx-4">
                                                                     <h5
                                                                         class="mb-2 text-2xl bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 font-bold tracking-tight">
                                                                         Rp. {{ number_format($kamar->harga) }}</h5>
@@ -243,16 +245,23 @@
                                                     @endforeach
                                                 </div>
                                             </div>
-                                            <div class="grid gap-6 grid-cols-2 col-span-3">
-                                                <div class="relative z-0 mb-6 w-full group">
+                                            <div class="grid gap-6 sm:grid-cols-2 col-span-3">
+                                                <div class="relative z-0 sm:mb-6 w-full group">
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jumlah
                                                         kamar</label>
-                                                    <input type="number" name="jumlah_kamar" value="1" min="1"
-                                                        id="jumlahKamar" value="{{ old('jumlah_kamar') }}" required
+                                                    <input type="number" name="jumlah_kamar" min="1" id="jumlahKamar"
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 hidden">
+                                                        Jumlah kamar yang tersedia:
+                                                        <span id="kamarTersedia">
+
+                                                        </span>
+                                                    </p>
+                                                    </p>
                                                 </div>
-                                                <div class="relative z-0 mb-6 w-full group">
+
+                                                <div class="relative z-0 sm:mb-6 w-full group">
                                                     <label
                                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
                                                         Permintaan khusus
@@ -363,59 +372,13 @@
                                                 required>
                                         </div>
                                     </div>
-                                    <div class="p-4 h-48 mt-2 flex flex-col justify-center items-center">
+                                    <div class="p-4 h-96 mt-2 flex flex-col justify-center items-center">
                                         <p class="font-bold text-lg">
                                             Mohon cek kembali data anda sebelum melanjutkan!
                                         </p>
                                         <p class="">
                                             Jika sudah yakin dengan data anda, klik tombol Konfirmasi.
                                         </p>
-                                    </div>
-                                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                            <thead
-                                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Product name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Color
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Category
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        Price
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3">
-                                                        <span class="sr-only">Edit</span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr
-                                                    class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                                    <th scope="row"
-                                                        class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                        Apple MacBook Pro 17"
-                                                    </th>
-                                                    <td class="px-6 py-4">
-                                                        Sliver
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        Laptop
-                                                    </td>
-                                                    <td class="px-6 py-4">
-                                                        $2999
-                                                    </td>
-                                                    <td class="px-6 py-4 text-right">
-                                                        <a href="#"
-                                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -435,8 +398,8 @@
                             </div>
                         </form>
                     </div>
-                    <div class="flex flex-col h-min bg-white rounded-lg border shadow-md">
-                        <div class="flex items-center mb-4 sm:px-6 pt-4">
+                    <div class="flex flex-col h-min bg-white rounded-lg border shadow-md row-start-1 sm:row-auto">
+                        <div class="flex items-center mb-4 px-6 pt-4">
                             <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -497,7 +460,7 @@
 
                         <div id="selectedKamar" x-show="hidden" class="">
                             <div class="flex flex-col bg-white rounded-lg border-2 m-6">
-                                <div class="flex flex-row items-center">
+                                <div class="flex flex-col sm:flex-row items-center">
                                     <img id="imgKamarSelected"
                                         class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                                         src="" alt="">
@@ -565,13 +528,11 @@
             if ($(this).is(':checked')) {
                 $('#selectedKamar').show();
                 $('#tipeKamarTitle').text($(this).attr('id'));
-                $('#jumlahKamarVal').text($('#jumlahKamar').val() + 'x');
                 $('#imgKamarSelected').attr('src', $(this).attr('data-img'));
                 var harga = $(this).attr('data-harga');
                 var jumlahKamar = $('#jumlahKamar').val();
                 var totalHarga = harga * jumlahKamar;
                 $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
-
 
                 $('#jumlahKamar').change(function() {
                     var jumlahKamar = $('#jumlahKamar').val();
@@ -579,6 +540,9 @@
                     $('#total_harga').val(totalHarga);
                     $('#totalHargaVal').text('Rp. ' + totalHarga.toLocaleString());
                 });
+
+                $('#kamarTersedia').text($(this).attr('data-jumlah'));
+                $('#kamarTersedia').parent().removeClass('hidden');
             }
         });
     </script>

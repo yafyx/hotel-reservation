@@ -51,7 +51,6 @@ class BookingController extends Controller
                 'email' => 'required|email:rfc,dns',
                 'no_tlp' => 'required|numeric',
                 'tipe_kamar' => 'required|string',
-                'jumlah_kamar' => 'required|numeric',
                 'tgl_checkin' => 'required',
                 'tgl_checkout' => 'required',
             ],
