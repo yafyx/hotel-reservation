@@ -23,17 +23,9 @@
             </div>
         </div>
         <div class="grid sm:grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-            <img src="{{ $fasilitas->gambar }}"
-                alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-                class="bg-gray-100 rounded-lg">
-            <img src="{{ $fasilitas->gambar }}"
-                alt="Top down view of walnut card tray with embedded magnets and card groove."
-                class="bg-gray-100 rounded-lg">
-            <img src="{{ $fasilitas->gambar }}" alt="Side of walnut card tray with card groove and recessed card area."
-                class="bg-gray-100 rounded-lg">
-            <img src="{{ $fasilitas->gambar }}"
-                alt="Walnut card tray filled with cards and card angled in dedicated groove."
-                class="bg-gray-100 rounded-lg">
+            @foreach (json_decode($facilities->gambar) as $gambar)
+                <img src="{{ asset('storage/' . $gambar) }}" alt="" class="bg-gray-100 rounded-lg">
+            @endforeach
         </div>
     </div>
 
@@ -48,14 +40,14 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="lg:w-8/12 mt-6 md:mt-8 lg:mt-0">
-                        <div class="relative w-full h-full">
-                            <img src="{{ $facilities->gambar }}" alt="A lounge sofa" role="img"
-                                class="w-full h-full relative hidden lg:block" />
-                            <img src="{{ $facilities->gambar }}" alt="A lounge sofa" role="img"
-                                class="w-full h-full lg:hidden" />
+                    @foreach (json_decode($facilities->gambar) as $gambar)
+                        <div class="lg:w-8/12 mt-6 md:mt-8 lg:mt-0">
+                            <div class="relative w-full h-full">
+                                <img src="{{ asset('storage/' . $gambar) }}" alt="" role="img"
+                                    class="w-full h-full relative hidden lg:block" />
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         @endforeach

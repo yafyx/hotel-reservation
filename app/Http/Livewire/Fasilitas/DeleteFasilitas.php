@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Fasilitas;
 use App\Models\Fasilitas;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteFasilitas extends ModalComponent
 {
@@ -30,7 +31,12 @@ class DeleteFasilitas extends ModalComponent
     public function confirm()
     {
         $this->fasilitasId;
-        Fasilitas::query()->find($this->fasilitasId)->delete();
+        $fasilitas = Fasilitas::query()->find($this->fasilitasId);
+        $fasilitas->delete();
+        $images = json_decode($fasilitas->gambar);
+        foreach ($images as $image) {
+            Storage::disk('public')->delete($image);
+        }
 
         $this->closeModalWithEvents([
             'pg:eventRefresh-default',

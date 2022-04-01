@@ -27,27 +27,31 @@
                     <div class="flex flex-row">
                         <a href="{{ route('admin.fasilitas') }}"
                             class="flex flex-col items-center w-full bg-gray-100 border shadow-md hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src="/docs/images/blog/image-4.jpg" alt="">
                             <div class="flex flex-col justify-between p-4 leading-normal">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     Fasilitas Hotel</h5>
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Lihat dan edit data
-                                    reservasi
-                                    hotel.
+                                    fasilitas hotel.
+                                </p>
+                            </div>
+                        </a>
+                        <a href="{{ route('admin.kamar.fasilitas') }}"
+                            class="flex flex-col items-center w-full bg-gray-100 border shadow-md hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <div class="flex flex-col justify-between p-4 leading-normal">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                    Fasilitas Kamar</h5>
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Lihat dan edit data
+                                    fasilitas kamar.
                                 </p>
                             </div>
                         </a>
                         <a href="{{ route('admin.kamar.tipe') }}"
                             class="flex flex-col items-center w-full bg-gray-100 border shadow-md hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src="/docs/images/blog/image-4.jpg" alt="">
                             <div class="flex flex-col justify-between p-4 leading-normal">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    Fasilitas Kamar</h5>
+                                    Tipe Kamar</h5>
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Lihat dan edit data
-                                    reservasi
-                                    hotel.
+                                    tipe kamar.
                                 </p>
                             </div>
                         </a>
