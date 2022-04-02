@@ -23,7 +23,7 @@ class KamarSeeder extends Seeder
                 'deskripsi_kamar' => $faker->text(100),
                 'fasilitas' => $faker->randomElement(['["AC","Televisi"]', '["AC","Televisi","Kulkas", "Bathtub"]', '["AC","Televisi","Bathtub"]']),
                 'harga' => $faker->numberBetween(500000, 1000000),
-                'gambar' => $faker->randomElement(['["images\/deluxe.jpeg"]', ["images\/standar.jpeg"], '["images\/kingsuites.jpeg"]']),
+                'gambar' => $faker->randomElement(['["images\/deluxe.jpeg"]', '["images\/standar.jpeg"]', '["images\/kingsuites.jpeg"]']),
                 'jumlah_kamar' => $faker->numberBetween(5, 200),
             ));
         }

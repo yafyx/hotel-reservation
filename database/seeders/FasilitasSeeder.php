@@ -20,7 +20,7 @@ class FasilitasSeeder extends Seeder
         for ($i = 1; $i <= 3; $i++) {
             DB::table('fasilitas')->insert(array(
                 'nama_fasilitas' => $faker->randomElement(['Bar', 'Kolam renang', 'Restaurant']),
-                'gambar' => $faker->randomElement(['["images\/bar.jpeg"]', ["images\/pool.jpeg"], '["images\/restaurant.jpeg"]']),
+                'gambar' => $faker->randomElement(['["images\/bar.jpeg"]', '["images\/pool.jpeg"]', '["images\/restaurant.jpeg"]']),
             ));
         }
     }
