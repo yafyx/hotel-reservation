@@ -28,7 +28,7 @@ class CreateFasilitasKamar extends ModalComponent
         $this->validate();
         FasilitasKamar::create([
             'nama_fasilitas' => $this->namaFasilitas,
-            'gambar' => '1',
+            'id_user' => auth()->user()->id,
         ]);
 
         $this->closeModalWithEvents([

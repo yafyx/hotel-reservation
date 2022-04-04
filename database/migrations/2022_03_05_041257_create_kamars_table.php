@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->string('gambar');
             $table->integer('jumlah_kamar');
+            $table->foreignId('id_user')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

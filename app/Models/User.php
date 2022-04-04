@@ -58,4 +58,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function Kamar()
+    {
+        return $this->hasMany(Kamar::class, 'id_user');
+    }
+
+    public function FasilitasKamar()
+    {
+        return $this->hasMany(FasilitasKamar::class, 'id_user');
+    }
+
+    public function Fasilitas()
+    {
+        return $this->hasMany(Fasilitas::class, 'id_user');
+    }
 }

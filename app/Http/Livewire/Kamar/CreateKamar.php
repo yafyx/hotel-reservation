@@ -54,6 +54,7 @@ class CreateKamar extends ModalComponent
             'harga' => $this->harga = str_replace('.', '', $this->harga),
             'gambar' => $this->images,
             'jumlah_kamar' => $this->jumlahKamar,
+            'id_user' => auth()->user()->id,
         ]);
 
         $this->closeModalWithEvents([

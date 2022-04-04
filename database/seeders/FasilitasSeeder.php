@@ -21,6 +21,7 @@ class FasilitasSeeder extends Seeder
             DB::table('fasilitas')->insert(array(
                 'nama_fasilitas' => $faker->randomElement(['Bar', 'Kolam renang', 'Restaurant']),
                 'gambar' => $faker->randomElement(['["images\/bar.jpeg"]', '["images\/pool.jpeg"]', '["images\/restaurant.jpeg"]']),
+                'id_user' => $i
             ));
         }
     }

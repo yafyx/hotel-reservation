@@ -4,25 +4,43 @@ namespace App\Http\Livewire\Fasilitas;
 
 use App\Models\Fasilitas;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 use LivewireUI\Modal\ModalComponent;
 
 class EditFasilitas extends ModalComponent
 {
-    public $fasilitasId, $namaFasilitas, $gambar;
+    public $fasilitasId, $namaFasilitas;
+    public $images = [];
 
-    protected $rules = [];
+    protected $rules = [
+        'namaFasilitas' => 'required',
+    ];
 
-    protected $messages = [];
+    protected $messages = [
+        'namaFasilitas.required' => 'Nama Fasilitas belum diubah',
+    ];
 
     public function update($fasilitasId)
     {
         $this->validate();
+
+        foreach ($this->images as $key => $image) {
+            $this->images[$key] = $image->store('images', 'public');
+        }
+
+        $this->images = json_encode($this->images);
         $fasilitas = Fasilitas::find($fasilitasId);
+
+        if ($this->images != $fasilitas->gambar) {
+            $oldImages = json_decode($fasilitas->gambar);
+            foreach ($oldImages as $oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+        }
+
         $fasilitas->update([
-            'tipe_kamar' => $this->tipeKamar,
-            'fasilitas' => $this->fasilitas,
-            'gambar' => $this->gambar,
-            'jumlah_kamar' => $this->jumlahKamar,
+            'nama_fasilitas' => $this->namaFasilitas,
+            'gambar' => $this->images,
         ]);
 
         $this->closeModalWithEvents([

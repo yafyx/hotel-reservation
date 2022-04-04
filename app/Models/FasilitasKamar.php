@@ -14,6 +14,11 @@ class FasilitasKamar extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'nama_fasilitas'
+        'nama_fasilitas', 'id_user'
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

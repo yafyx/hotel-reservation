@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('fasilitas_kamars', function (Blueprint $table) {
             $table->id();
             $table->string('nama_fasilitas')->unique();
+            $table->foreignId('id_user')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

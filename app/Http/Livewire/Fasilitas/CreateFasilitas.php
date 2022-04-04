@@ -40,6 +40,7 @@ class CreateFasilitas extends ModalComponent
         Fasilitas::create([
             'nama_fasilitas' => $this->namaFasilitas,
             'gambar' => $this->images,
+            'id_user' => auth()->user()->id,
         ]);
 
         $this->closeModalWithEvents([

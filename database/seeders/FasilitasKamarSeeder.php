@@ -21,6 +21,7 @@ class FasilitasKamarSeeder extends Seeder
             DB::table('fasilitas_kamars')->insert(array(
                 'nama_fasilitas' => $faker->unique()
                     ->randomElement(['AC', 'Bathtub', 'Televisi', 'Brankas dalam kamar', 'Pembuat kopi / teh']),
+                'id_user' => $i
             ));
         }
     }

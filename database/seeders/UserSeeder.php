@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             DB::table('users')->insert(array(
                 'name' => $faker->name,
                 'isAdmin' => $faker->boolean(50),

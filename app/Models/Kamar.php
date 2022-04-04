@@ -14,7 +14,7 @@ class Kamar extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'tipe_kamar', 'deskripsi_kamar', 'fasilitas', 'harga', 'gambar', 'jumlah_kamar',
+        'tipe_kamar', 'deskripsi_kamar', 'fasilitas', 'harga', 'gambar', 'jumlah_kamar', 'id_user'
     ];
 
     public function Reservasi()
@@ -24,5 +24,9 @@ class Kamar extends Model
     public function JumlahKamar()
     {
         return $this->hasOne(Reservasi::class, 'jumlah_kamar', 'jumlah_kamar');
+    }
+    public function User()
+    {
+        return $this->belongsTo(User::class);
     }
 }

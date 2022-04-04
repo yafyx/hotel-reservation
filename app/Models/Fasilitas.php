@@ -14,6 +14,11 @@ class Fasilitas extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'nama_fasilitas', 'gambar',
+        'nama_fasilitas', 'gambar', 'id_user'
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

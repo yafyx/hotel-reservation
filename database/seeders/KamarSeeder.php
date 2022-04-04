@@ -25,6 +25,7 @@ class KamarSeeder extends Seeder
                 'harga' => $faker->numberBetween(500000, 1000000),
                 'gambar' => $faker->randomElement(['["images\/deluxe.jpeg"]', '["images\/standar.jpeg"]', '["images\/kingsuites.jpeg"]']),
                 'jumlah_kamar' => $faker->numberBetween(5, 200),
+                'id_user' => $i
             ));
         }
     }
