@@ -1294,13 +1294,13 @@ input:checked + .toggle-bg{
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.mx-4{
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 .my-2{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .-mx-3{
   margin-left: -0.75rem;
@@ -1391,6 +1391,15 @@ input:checked + .toggle-bg{
 .mb-8{
   margin-bottom: 2rem;
 }
+.ml-0\.5{
+  margin-left: 0.125rem;
+}
+.ml-0{
+  margin-left: 0px;
+}
+.mt-20{
+  margin-top: 5rem;
+}
 .mb-10{
   margin-bottom: 2.5rem;
 }
@@ -1399,12 +1408,6 @@ input:checked + .toggle-bg{
 }
 .mr-1{
   margin-right: 0.25rem;
-}
-.ml-0\.5{
-  margin-left: 0.125rem;
-}
-.ml-0{
-  margin-left: 0px;
 }
 .mr-0{
   margin-right: 0px;
@@ -1420,9 +1423,6 @@ input:checked + .toggle-bg{
 }
 .mb-0{
   margin-bottom: 0px;
-}
-.mt-20{
-  margin-top: 5rem;
 }
 .mb-12{
   margin-bottom: 3rem;
@@ -1777,11 +1777,11 @@ input:checked + .toggle-bg{
 .grid-cols-7{
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
-.grid-rows-2{
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-}
 .grid-rows-3{
   grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+.grid-rows-2{
+  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 .flex-row{
   flex-direction: row;
@@ -1883,15 +1883,15 @@ input:checked + .toggle-bg{
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
-.space-x-5 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
 .space-x-10 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(2.5rem * var(--tw-space-x-reverse));
   margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]){
   --tw-divide-y-reverse: 0;
@@ -2257,11 +2257,11 @@ input:checked + .toggle-bg{
 .bg-no-repeat{
   background-repeat: no-repeat;
 }
-.fill-blue-600{
-  fill: #1C64F2;
-}
 .fill-current{
   fill: currentColor;
+}
+.fill-blue-600{
+  fill: #1C64F2;
 }
 .object-cover{
   -o-object-fit: cover;
@@ -2296,9 +2296,6 @@ input:checked + .toggle-bg{
 }
 .p-1\.5{
   padding: 0.375rem;
-}
-.p-64{
-  padding: 16rem;
 }
 .px-4{
   padding-left: 1rem;
@@ -2550,13 +2547,13 @@ input:checked + .toggle-bg{
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
 .text-5xl{
   font-size: 3rem;
   line-height: 1;
+}
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 .font-medium{
   font-weight: 500;
@@ -2573,11 +2570,11 @@ input:checked + .toggle-bg{
 .font-normal{
   font-weight: 400;
 }
-.font-black{
-  font-weight: 900;
-}
 .font-light{
   font-weight: 300;
+}
+.font-black{
+  font-weight: 900;
 }
 .uppercase{
   text-transform: uppercase;
@@ -2701,6 +2698,10 @@ input:checked + .toggle-bg{
 .text-transparent{
   color: transparent;
 }
+.text-blue-500{
+  --tw-text-opacity: 1;
+  color: rgb(63 131 248 / var(--tw-text-opacity));
+}
 .text-red-800{
   --tw-text-opacity: 1;
   color: rgb(155 28 28 / var(--tw-text-opacity));
@@ -2716,10 +2717,6 @@ input:checked + .toggle-bg{
 .text-black{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-.text-blue-500{
-  --tw-text-opacity: 1;
-  color: rgb(63 131 248 / var(--tw-text-opacity));
 }
 .underline{
   -webkit-text-decoration-line: underline;

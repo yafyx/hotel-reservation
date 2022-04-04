@@ -19,9 +19,10 @@ return new class extends Migration
         DROP PROCEDURE IF EXISTS `selectTamu`;  
         CREATE PROCEDURE selectTamu()
         BEGIN
-        SELECT nama_tamu,id_kamar FROM reservasis;
+        SELECT nama_tamu,tipe_kamar FROM reservasis JOIN kamars ON reservasis.id_kamar = kamars.id;
         END
-        ');
+        '
+        );
     }
 
     /**
