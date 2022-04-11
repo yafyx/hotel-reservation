@@ -21,7 +21,6 @@
 
     <div class="bg-white">
         @include('home.layouts.components.navbar')
-
         <main role="main" class="main-content">
             @yield('content')
             @include('home.layouts.components.footer')

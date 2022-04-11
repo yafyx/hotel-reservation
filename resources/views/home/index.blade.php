@@ -1,7 +1,7 @@
 @extends('home.layouts.app')
 @section('title', 'Home')
 @section('content')
-    <section class="px-2 pb-32 pt-10 bg-white md:px-0">
+    <section class="px-2 pb-32 pt-28 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
             <form action="{{ route('booking.create') }}" method="PUT">
                 <div

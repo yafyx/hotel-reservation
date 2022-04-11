@@ -182,7 +182,6 @@ final class ReservasiTable extends PowerGridComponent
             Column::add()
                 ->title('Status')
                 ->field('status')
-                ->makeInputText('nama_tamu')
                 ->searchable()
                 ->sortable(),
         ];
@@ -206,10 +205,14 @@ final class ReservasiTable extends PowerGridComponent
     public function actions(): array
     {
         return [
-            // Button::add('edit')
-            //     ->caption('Edit')
-            //     ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-            //     ->route('reservasi.edit', ['reservasi' => 'id']),
+            Button::add('edit')
+                ->caption(__('Edit'))
+                ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
+                ->openModal('reservasi.edit-status', [
+                    'reservasiId'                  => 'id',
+                    'reservasiStatus'              => 'status',
+                ]),
+
             Button::add('detail')
                 ->caption(__('Detail'))
                 ->class('text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center')
