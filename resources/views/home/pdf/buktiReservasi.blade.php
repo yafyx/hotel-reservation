@@ -96,15 +96,14 @@
                     <table>
                         <tr>
                             <td class="title">
+                                <img src="https://i.ibb.co/4ZmCqBg/svgexport-2.png" alt="">
                                 Algor.
                             </td>
 
                             <td style="font-weight: bold">
                                 Hotel Algor<br>
                                 <span style="font-weight: normal; font-size: small">
-                                    Sparksuite, Inc.<br>
-                                    12345 Sunny Road<br>
-                                    Sunnyville, CA 12345
+                                    Jl. Depok Jaya, No. 12, Jawa Barat
                                 </span>
                             </td>
                         </tr>

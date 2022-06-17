@@ -1,8 +1,35 @@
 @extends('home.layouts.app')
 @section('title', 'Home')
 @section('content')
-    <section class="px-2 pb-32 pt-28 bg-white md:px-0">
+    <section class="px-2 pb-32 pt-10 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+
+            <form action="{{ route('search') }}" method="GET">
+                <div class="flex pb-10 items-center justify-center">
+                    <div class="flex border border-gray-300 rounded-lg">
+                        <input type="text" name="search" autocomplete="off"
+                            class="px-4 py-2 w-80 rounded-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+                            placeholder="Cari dengan Booking ID" required>
+
+                        <button type="submit" class="flex items-center justify-center px-4 border-l">
+                            <svg class="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @if (count($errors) > 0)
+                        <div class="text-red-500 text-xs italic ml-4">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </form>
+
             <form action="{{ route('booking.create') }}" method="PUT">
                 <div
                     class="flex flex-col gap-y-4 sm:flex-row justify-evenly p-4 w-full text-center bg-white rounded-lg border shadow-lg sm:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -10,8 +37,8 @@
                         class="flex flex-col gap-y-4 items-center sm:flex-row">
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                                         clip-rule="evenodd"></path>

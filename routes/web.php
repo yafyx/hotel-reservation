@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Tamu\BookingController;
 use App\Http\Controllers\Tamu\ViewController;
 use App\Http\Livewire\Fasilitas\FasilitasC;
@@ -27,6 +28,11 @@ Route::get('/', function () {
 });
 
 Route::resource('/booking', BookingController::class);
+
+Route::get(
+    '/search',
+    [SearchController::class, 'search']
+)->name('search');
 
 Route::get('/booking/{booking_id}/unduhPDF', [BookingController::class, 'unduhPDF'])->name('booking.unduhPDF');
 
